@@ -1,11 +1,11 @@
 #! /bin/bash
 
-#title           :ubp_exportdb_cron.sh
+#title           :exportdb_cron.sh
 #description     :enable or disable an regular export task
 #author          :xubingbing
 #date            :20131223
 #version         :0.1    
-#usage           :./ubp_exportdb.sh <option> <outputdir> <day> <month> <day of week>
+#usage           :./exportdb.sh <option> <outputdir> <day> <month> <day of week>
 #notes           :there should be a output.list file which specifies table names 
 #                 in output directory. 
 #==============================================================================
@@ -26,9 +26,9 @@ month=$4
 datestr=`date +'%Y%m%d%H%M%S'`
 
 if [ $option -eq 0 ];then
-  sed -i '/ubp_exportdb.sh/d' /var/spool/cron/tabs/root
+  sed -i '/exportdb.sh/d' /var/spool/cron/tabs/root
 else
-  echo "0 0 $day $month $week /opt/UBP/bin/ubp_exportdb.sh $outputdir >/dev/null 2>&1 &" >> /var/spool/cron/tabs/root
+  echo "0 0 $day $month $week /opt/UBP/bin/exportdb.sh $outputdir >/dev/null 2>&1 &" >> /var/spool/cron/tabs/root
 fi
 /etc/init.d/cron reload
 /etc/init.d/cron restart
