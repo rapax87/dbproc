@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#title           :ubp_dbcommon.sh
+#title           :dbcommon.sh
 #description     :Define common function of DB proc
 #author		 :xubingbing
 #date            :20131213
@@ -9,7 +9,7 @@
 #notes           :called by other DB proc shell, import, output etc. 
 #==============================================================================
 . /opt/UBP/bin/common.sh
-LOG_FILE=/opt/UBP/logs/ubp_dbproc.log
+LOG_FILE=/opt/UBP/logs/dbproc.log
 
 function output()
 {
