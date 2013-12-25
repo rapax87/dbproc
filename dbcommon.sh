@@ -5,11 +5,14 @@
 #author		 :xubingbing
 #date            :20131213
 #version         :0.1    
-#usage		 :hacommon.sh 
+#usage		 :./dbcommon.sh 
 #notes           :called by other DB proc shell, import, output etc. 
 #==============================================================================
-. /opt/UBP/bin/common.sh
-LOG_FILE=/opt/UBP/logs/dbproc.log
+g_odb_user="odb_user"
+g_odb_psw="123456"
+g_ubpdb="ubpdb"
+
+LOG_FILE=/tmp/dbproc.log
 
 function output()
 {
