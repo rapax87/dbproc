@@ -1,11 +1,11 @@
 #! /bin/bash
 
-#title           :ubp_importdb.sh
+#title           :importdb.sh
 #description     :import XML data to DB
 #author          :xubingbing
 #date            :20131223
 #version         :0.1    
-#usage           :./ubp_importdb.sh <xml file path>
+#usage           :./importdb.sh <xml file path>
 #notes           : 
 #==============================================================================
 dir=$(dirname $0)
@@ -26,7 +26,7 @@ delete_before_import=$2
 #  exit 2
 #fi
 
-. ./ubp_dbcommon.sh
+. ./dbcommon.sh
 
 if [ ! -f $xmlfile ];then
   output "ERROR" "$xmlfile not exist" $LINENO
