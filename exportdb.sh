@@ -1,11 +1,11 @@
 #! /bin/bash
 
-#title           :ubp_exportdb.sh
+#title           :exportdb.sh
 #description     :export DB data to XML
 #author          :xubingbing
 #date            :20131223
 #version         :0.1    
-#usage           :./ubp_exportdb.sh <outputdir>
+#usage           :./exportdb.sh <outputdir>
 #notes           :there should be a output.list file which specifies table names 
 #                 in output directory. 
 #==============================================================================
@@ -22,7 +22,7 @@ fi
 outputdir=$1
 datestr=`date +'%Y%m%d%H%M%S'`
 
-. ./ubp_dbcommon.sh
+. ./dbcommon.sh
 
 if [ ! -d $outputdir ];then
   output "ERROR" "$outputdir not exist" $LINENO
