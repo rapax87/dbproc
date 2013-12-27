@@ -1,0 +1,11 @@
+type eAPPApplication (
+	static int RestartLimit = 3
+	static int ToleranceLimit = 1
+	static str ArgList[] = { ShutdownWaitLimit, DelayAfterOnline, DelayAfterOffline, eAppHome }
+	static boolean AEPTimeout = 1
+	int ShutdownWaitLimit = 30
+	int DelayAfterOnline = 30
+	int DelayAfterOffline = 30
+	str eAppHome
+)
+
