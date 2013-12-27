@@ -1,0 +1,268 @@
+#
+# Configuration Values:
+#
+our %CFG;
+
+$CFG{accepteula}=1;
+$CFG{fencingenabled}="0";
+$CFG{lltoverudp}="0";
+$CFG{opt}{configure}=1;
+$CFG{opt}{gco}=1;
+$CFG{opt}{install}=1;
+$CFG{opt}{installallpkgs}=1;
+$CFG{opt}{prodmode}="SF Standard HA";
+$CFG{opt}{updatekeys}=1;
+$CFG{opt}{vr}=1;
+$CFG{opt}{vxkeyless}=1;
+$CFG{prod}="SFHA60";
+$CFG{systems}=[ qw(%hostName%) ];
+$CFG{vcs_allowcomms}=1;
+$CFG{vcs_clusterid}=%clusterID%;
+$CFG{vcs_clustername}="%clusterName%";
+$CFG{vcs_csgnetmask}="255.255.255.0";
+$CFG{vcs_csgnic}{all}="%csgnic%";
+$CFG{vcs_csgvip}="%csgvip%";
+$CFG{vcs_lltlink1}{"%hostName%"}="%lltlink1%";
+#$CFG{vcs_lltlinklowpri1}{"%hostName%"}="%lltlinklowpri1%";
+$CFG{vcs_userenpw}=[ qw(GjkCjeJgkFkkIskEjh) ];
+$CFG{vcs_username}=[ qw(admin) ];
+$CFG{vcs_userpriv}=[ qw(Administrators) ];
+
+1;
+# CFG{accepteula} is an optional one dimensional scalar variable
+# This variable defines whether user agrees with EULA.pdf on the media
+# 
+# CFG{at_rootdomain} is an optional one dimensional list variable
+# This variable defines the name of the system where the root broker is installed
+# 
+# CFG{cps_db_dir} is a required one dimensional scalar variable
+# This variable defines the absolute path of CP server database
+# 
+# CFG{cps_delete_config_log} is an optional one dimensional scalar variable
+# This variable defines deleting the config files and log files of the CP server during unconfiguration
+# 
+# CFG{cps_delete_database} is an optional one dimensional scalar variable
+# This variable defines deleting the database of the CP server during unconfiguration
+# 
+# CFG{cps_diskgroup} is an optional one dimensional scalar variable
+# This variable defines the disk group for the CP server database
+# 
+# CFG{cps_fips_mode} is an optional one dimensional scalar variable
+# This variable defines if security with fips is configured for the CP server
+# 
+# CFG{cps_netmasks} is an optional one dimensional list variable
+# This variable defines the netmasks for the virtual IP addresses
+# 
+# CFG{cps_network_hosts}{<cpsnic>} is an optional two dimensional list variable
+# This variable defines the network hosts for the NIC resource
+# 
+# CFG{cps_newdg_disks} is an optional one dimensional list variable
+# This variable defines the disks to be used to create a new disk group for the CP server database
+# 
+# CFG{cps_newvol_volsize} is an optional one dimensional scalar variable
+# This variable defines the volume size to create a new volume for the CP server database
+# 
+# CFG{cps_nic_list}{<cpsvip>} is a required two dimensional list variable
+# This variable defines the NICs of the systems for the virtual IP address
+# 
+# CFG{cps_ports} is a required one dimensional list variable
+# This variable defines the port number for the virtual IP addresses for the CP server
+# 
+# CFG{cps_prefix_length} is an optional one dimensional list variable
+# This variable defines the prefix length for the virtual IP addresses
+# 
+# CFG{cps_reuse_cred} is an optional one dimensional scalar variable
+# This variable defines if reusing the existing credentials for the CP server
+# 
+# CFG{cps_security} is a required one dimensional scalar variable
+# This variable defines if security is configured for the CP server
+# 
+# CFG{cps_sfha_config} is an optional one dimensional scalar variable
+# This variable defines if the CP server will be configured on a SFHA cluster
+# 
+# CFG{cps_singlenode_config} is an optional one dimensional scalar variable
+# This variable defines if the CP server will be configured on a singlenode VCS cluster
+# 
+# CFG{cps_unconfig} is an optional one dimensional scalar variable
+# This variable defines if the CP server will be unconfigured
+# 
+# CFG{cps_vip2nicres_map}{<vip>} is a required two dimensional scalar variable
+# This variable defines the NIC resource to associate with the virtual IP address
+# 
+# CFG{cps_vips} is a required one dimensional list variable
+# This variable defines the virtual IP addresses for the CP server
+# 
+# CFG{cps_volume} is an optional one dimensional scalar variable
+# This variable defines the volume for the CP server database
+# 
+# CFG{cpsname} is a required one dimensional scalar variable
+# This variable defines the name of the CP server
+# 
+# CFG{fencing_config_cpagent} is an optional one dimensional scalar variable
+# This variable defines if the coordination point agent is configured
+# 
+# CFG{fencing_cpagent_faulttolerance} is an optional one dimensional scalar variable
+# This variable defines the FaultTolerance attribute of the coordination point agent
+# 
+# CFG{fencing_cpagent_monitor_freq} is an optional one dimensional scalar variable
+# This variable defines the LevelTwoMonitorFreq attribute of the coordination point agent
+# 
+# CFG{fencing_cpagentgrp} is an optional one dimensional scalar variable
+# This variable defines the coordination point agent
+# 
+# CFG{fencing_dgname} is an optional one dimensional scalar variable
+# This variable defines fencing disk group
+# 
+# CFG{fencing_scsi3_disk_policy} is an optional one dimensional scalar variable
+# This variable defines fencing disk policy
+# 
+# CFG{fencingenabled} is a required one dimensional scalar variable
+# This variable defines fencing as enabled
+# 
+# CFG{keys}{<system>} is an optional two dimensional list variable
+# This variable defines a list of license keys to be registered on the systems during install
+# 
+# CFG{opt}{configcps} is a required two dimensional scalar variable
+# This variable performs CP server configuration task
+# 
+# CFG{opt}{configure} is an optional two dimensional scalar variable
+# This variable designates a standard configure task
+# 
+# CFG{opt}{fips} is an optional two dimensional scalar variable
+# This variable defines whether to enable or disable security with fips mode on a running VCS cluster. It could only be used together with -security or -securityonenode option
+# 
+# CFG{opt}{install} is an optional two dimensional scalar variable
+# This variable installs rpms and starts the products that do not require configuration
+# 
+# CFG{opt}{installallpkgs} is an optional two dimensional scalar variable
+# This variable installs all product rpms
+# 
+# CFG{opt}{installminpkgs} is an optional two dimensional scalar variable
+# This variable installs only minimum product rpms
+# 
+# CFG{opt}{installrecpkgs} is an optional two dimensional scalar variable
+# This variable installs only recommended product rpms
+# 
+# CFG{opt}{keyfile} is an optional two dimensional scalar variable
+# This variable defines the location of an ssh keyfile used to communicate with all remote systems
+# 
+# CFG{opt}{license} is an optional two dimensional scalar variable
+# This variable licenses the product only
+# 
+# CFG{opt}{logpath} is an optional two dimensional scalar variable
+# This variable defines the location where log files are copied to following an install.  The default location is /opt/VRTS/install/logs
+# 
+# CFG{opt}{nolic} is an optional two dimensional scalar variable
+# This variable installs the product without requiring entry of a license key
+# 
+# CFG{opt}{patchpath} is an optional two dimensional scalar variable
+# This variable defines a location, typically an NFS mount, from which all remote systems can install product patches. The location must be accessible from all target systems
+# 
+# CFG{opt}{pkgpath} is an optional two dimensional scalar variable
+# This variable defines a location, typically an NFS mount, from which all remote systems can install product rpms. The location must be accessible from all target systems
+# 
+# CFG{opt}{security} is an optional two dimensional scalar variable
+# This variable defines whether to enable or disable secure mode on a running VCS cluster.
+# 
+# CFG{opt}{securityonenode} is an optional two dimensional scalar variable
+# This variable defines whether to configure secure cluster node by node
+# 
+# CFG{opt}{tmppath} is an optional two dimensional scalar variable
+# This variable defines the location where a working directory is created to store temporary files and rpms needed during the install.  The default location is /var/tmp
+# 
+# CFG{opt}{uninstall} is an optional two dimensional scalar variable
+# This variable uninstalls a product
+# 
+# CFG{opt}{vxkeyless} is an optional two dimensional scalar variable
+# This variable installs the product with keyless license
+# 
+# CFG{prod} is a required one dimensional scalar variable
+# This variable is an abbreviation that defines the product to be installed, uninstalled, or configured
+# 
+# CFG{security_conf_dir} is an optional one dimensional scalar variable
+# This variable defines the folder where the configuration files are placed
+# 
+# CFG{securityonenode_menu} is an optional one dimensional scalar variable
+# This variable defines the menu option number chosen to configure the secure cluster one by one
+# 
+# CFG{systems} is a required one dimensional list variable
+# This variable defines the list of systems on which the product is to be installed, uninstalled, or configured
+# 
+# CFG{systemscfg} is an optional one dimensional list variable
+# This variable defines the list of systems to be recognized for configuration when a secure environment prevents all systems from being installed at once
+# 
+# CFG{uploadlogs} is an optional one dimensional scalar variable
+# This variable defines whether user agrees to upload the log files onto Symantec website
+# 
+# CFG{vcs_allowcomms} is a required one dimensional scalar variable
+# This variable defines whether a single node SFHA configuration should start GAB and LLT or not.
+# 
+# CFG{vcs_clusterid} is a required one dimensional scalar variable
+# This variable must be an integer between 0 and 65535 which uniquely identifies the cluster
+# 
+# CFG{vcs_clustername} is a required one dimensional scalar variable
+# This variable defines the name of the cluster
+# 
+# CFG{vcs_csgnetmask} is an optional one dimensional scalar variable
+# This variable defines the Netmask of the virtual IP address to be used by the Cluster Manager (Web Console)
+# 
+# CFG{vcs_csgnic}{<system>} is an optional two dimensional scalar variable
+# This variable defines the NIC for Cluster Manager (Web Console) to use on a system.  'ALL' can be entered as a system value if the same NIC is used on all systems
+# 
+# CFG{vcs_csgvip} is an optional one dimensional scalar variable
+# This variable defines the virtual IP address to be used by the Cluster Manager (Web Console)
+# 
+# CFG{vcs_eat_security} is an optional one dimensional scalar variable
+# This variable defines if user chooses to set the cluster in secure enabled mode or not
+# 
+# CFG{vcs_eat_security_fips} is an optional one dimensional scalar variable
+# This variable defines if user chooses to set the cluster in security with fips mode or not
+# 
+# CFG{vcs_gconetmask} is an optional one dimensional scalar variable
+# This variable defines the Netmask of the virtual IP address to be used by the Global Cluster Option)
+# 
+# CFG{vcs_gconic}{<system>} is an optional two dimensional scalar variable
+# This variable defines the NIC for the Virtual IP used for the Global Cluster Option.  'ALL' can be entered as a system value if the same NIC is used on all systems
+# 
+# CFG{vcs_gcovip} is an optional one dimensional scalar variable
+# This variable defines the virtual IP address to be used by the Global Cluster Option
+# 
+# CFG{vcs_lltlink#}{<system>} is a required two dimensional scalar variable
+# This variable defines the NIC to be used for a private heartbeat link on each system.  Two LLT links are required per system (lltlink1 and lltlink2).  Up to four LLT links can be configured
+# 
+# CFG{vcs_lltlinklowpri#}{<system>} is an optional two dimensional scalar variable
+# This variable defines a low-priority heartbeat link.  Typically, low-priority heartbeat link is used on a public network link to provide an additional layer of communication
+# 
+# CFG{vcs_securegco} is an optional one dimensional scalar variable
+# This variable defines the security of the Global Cluster Option(0=unsecure,1=secure)
+# 
+# CFG{vcs_smtprecp} is an optional one dimensional list variable
+# This variable defines a list of full email addresses (example: user@yourcompany.com) of SMTP recipients
+# 
+# CFG{vcs_smtpserv} is an optional one dimensional list variable
+# This variable defines the minimum severity level of messages (Information, Warning, Error, SevereError) that listed SMTP recipients are to receive
+# 
+# CFG{vcs_smtpserver} is an optional one dimensional scalar variable
+# This variable defines the domain-based hostname (example: smtp.yourcompany.com) of the SMTP server to be used for web notification
+# 
+# CFG{vcs_snmpcons} is an optional one dimensional list variable
+# This variable defines a list of SNMP console system names
+# 
+# CFG{vcs_snmpcsev} is an optional one dimensional list variable
+# This variable defines the minimum severity level of messages (Information, Warning, Error, SevereError) that listed SNMP consoles are to receive
+# 
+# CFG{vcs_snmpport} is an optional one dimensional scalar variable
+# This variable defines the SNMP trap daemon port (default=162)
+# 
+# CFG{vcs_userenpw} is an optional one dimensional list variable
+# This variable defines an encrypted password for each VCS user
+# 
+# CFG{vcs_username} is an optional one dimensional list variable
+# This variable defines a list of VCS usernames
+# 
+# CFG{vcs_userpriv} is an optional one dimensional list variable
+# This variable defines each user's VCS privileges
+# 
+# CFG{vm_no_open_vols} is an optional one dimensional scalar variable
+# This variable indicates that the user should not be asked if there are any open volumes when vxconfigd is not enabled. Such prompts are asked during uninstallations. (1: affirms there are no open volumes on the system)
+# 
