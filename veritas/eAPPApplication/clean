@@ -1,0 +1,12 @@
+#!/bin/sh
+
+pkill -9 -f "ubp_adm"
+pkill -9 -f "ubp_sysd"
+pkill -9 -f "ubp_svcd"
+
+#.  /opt/UBP/svc_profile.sh
+#/opt/UBP/bin/ubp_adm -cmd stop
+service mysql stop
+
+exit 0
+
