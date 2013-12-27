@@ -1,0 +1,131 @@
+#!/bin/bash
+# $Id: online,v 2.40 2012/07/02 13:27:08 sjain2 Exp $ #
+# $Copyrights: Copyright (c) 2012 Symantec Corporation.
+# All rights reserved.
+#
+# THIS SOFTWARE CONTAINS CONFIDENTIAL INFORMATION AND TRADE SECRETS OF
+# SYMANTEC CORPORATION.  USE, DISCLOSURE OR REPRODUCTION IS PROHIBITED
+# WITHOUT THE PRIOR EXPRESS WRITTEN PERMISSION OF SYMANTEC CORPORATION.
+#
+# The Licensed Software and Documentation are deemed to be commercial
+# computer software as defined in FAR 12.212 and subject to restricted
+# rights as defined in FAR Section 52.227-19 "Commercial Computer
+# Software - Restricted Rights" and DFARS 227.7202, "Rights in
+# Commercial Computer Software or Commercial Computer Software
+# Documentation", as applicable, and any successor regulations. Any use,
+# modification, reproduction release, performance, display or disclosure
+# of the Licensed Software and Documentation by the U.S. Government
+# shall be solely in accordance with the terms of this Agreement.  $
+#
+# This is the online script for a disk group.
+touch online.xxx
+date >> online.xxx
+echo "begin start eapp" >> online.xxx
+#Command=$0
+#date_str=`date '+%Y%m%d%H%M%S'`
+echo $date_str >> online.xxx
+ResName=$1; shift; 
+
+source /etc/profile
+. /opt/UBP/bin/common.sh
+echo "java home is $JAVA_HOME" >> online.xxx
+echo "path is $PATH" >> online.xxx
+
+. "${CLUSTER_HOME}/bin/ag_i18n_inc.sh"
+VCSAG_SET_ENVS "${ResName}"
+
+VCSAG_GET_ATTR_VALUE "eAppHome" -1 1 "$@"
+if [ $? != $VCSAG_SUCCESS ]; then
+    echo "get eAppHome error" >> online.xxx
+    exit 0
+fi
+eAppHome=${VCSAG_ATTR_VALUE}
+echo "eAppHome is $eAppHome" >> online.xxx
+if [ ! -d $eAppHome ]
+then
+	echo "$eAppHome not exist" >> online.xxx
+	exit 0
+fi
+
+unset COLUMNS
+MYPWD=`pwd`
+echo "cd dir $eAppHome" >> online.xxx
+cd $eAppHome >> online.xxx 2>&1
+
+
+
+echo "service mysql start" >> online.xxx
+service mysql start >> online.xxx 2>&1
+
+echo "restart web ..." >> online.xxx
+v_result=`ps -ef|grep "/opt/ubp_websvc"|grep -wv grep|wc -l`
+if [ "X$v_result" = "X0" ]
+then
+  if [ -f /opt/ubp_websvc/webstart.sh ]
+  then
+    cd /opt/ubp_websvc
+    echo "web svc not exists, cd dir /opt/ubp_websvc" >> online.xxx
+    ./webstart.sh
+  fi
+else
+  if [ -f /opt/ubp_websvc/webrestart.sh ]
+  then
+    cd /opt/ubp_websvc
+    echo "web svc exists, cd dir /opt/ubp_websvc" >> online.xxx
+    ./webrestart.sh
+  fi
+fi
+
+sed -i '/^$/d' /var/spool/cron/tabs/root
+rec_count=`grep "/opt/UBP/bin/monitor_3rd_svcs.sh" /var/spool/cron/tabs/root|wc -l`
+if [ X$rec_count = X"0" ]
+then
+  echo "* * * * * /opt/UBP/bin/monitor_3rd_svcs.sh" >> /var/spool/cron/tabs/root
+fi
+/etc/init.d/cron reload
+/etc/init.d/cron restart
+
+echo "cd dir $eAppHome" >> online.xxx
+cd $eAppHome >> online.xxx 2>&1
+
+echo "set env ..." >> online.xxx
+. ../svc_profile.sh 
+
+echo "start ubp_adm" >> online.xxx
+
+#clear JVM cache file for openfire
+if [ -f /.install4j ]
+then
+  echo "move .install4j" >> online.xxx
+  mv -f /.install4j /.install4j_bak
+fi
+
+if [ -f ~/.install4j ]
+then
+  echo "move ~/.install4j" >> online.xxx
+  mv -f ~/.install4j ~/.install4j_bak
+fi
+
+#from start_ubp.sh
+if [ -f /tmp/i4jdaemon__opt_SDS_openfire_bin_openfire ]
+then
+    rm -rf /tmp/i4jdaemon__opt_SDS_openfire_bin_openfire
+    echo ">>>>>>>> rm -f sds /tmp/i4jdaemon__opt_SDS_openfire_bin_openfire..." >> /opt/UBP/logs/start_ubp.log
+fi
+
+#clear old pid files
+if [ -d /opt/UBP/var/tmp ]
+then
+    rm -f /opt/UBP/var/tmp/*.pid
+    echo ">>>>>>>> rm -f pid ..." >> online.xxx
+fi
+
+./ubp_adm -cmd start 
+
+cd $MYPWD
+date >> online.xxx
+echo "end start eapp " >> online.xxx
+#exit 100;
+
+exit 0
+
