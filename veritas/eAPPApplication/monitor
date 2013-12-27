@@ -1,0 +1,48 @@
+#!/bin/bash
+#Command=$0
+ResName=$1; shift;
+VCSAG_RES_OFFLINE=100
+VCSAG_RES_ONLINE=110
+VCSAG_RES_UNKNOWN=99
+#echo $* >> monitor.xxx
+. "${CLUSTER_HOME}/bin/ag_i18n_inc.sh"
+VCSAG_SET_ENVS "${ResName}"
+VCSAG_GET_ATTR_VALUE "eAppHome" -1 1 "$@"
+if [ $? != $VCSAG_SUCCESS ]; then
+    exit $VCSAG_RES_UNKNOWN
+fi
+
+eAppHome=${VCSAG_ATTR_VALUE}
+if [ ! -d $eAppHome ]
+then
+	exit $VCSAG_RES_UNKNOWN
+fi
+MYPWD=`pwd`
+cd $eAppHome
+
+. ../svc_profile.sh
+#./ubp_adm -cmd status | grep "ubp_daem" >$MYPWD/tmpmon.file
+ps -ef | grep "ubp_sysd -cmd start"  | grep -v grep >$MYPWD/tmpmon.file
+#cat $MYPWD/tmpmon.file >> monitor.xxx
+cd $MYPWD
+
+#STARTED_COUNT=`grep -v "Not Running" tmpmon.file|grep "Running"| wc -l`
+STARTED_COUNT=`cat $MYPWD/tmpmon.file | wc -l`
+
+rm tmpmon.file
+#echo "TOTAL_NG_COUNT=${TOTAL_NG_COUNT}, STARTED_COUNT=${STARTED_COUNT}" >> monitor.xxx
+#echo "STARTED_COUNT=${STARTED_COUNT}" >> monitor.xxx
+
+if [ ${STARTED_COUNT} -eq 0 ]
+then 
+	#echo "agent offline" >> monitor.xxx
+	exit ${VCSAG_RES_OFFLINE}
+else
+	#echo "agent online" >> monitor.xxx
+	exit ${VCSAG_RES_ONLINE}
+fi
+
+
+
+
+
