@@ -1,0 +1,58 @@
+#!/bin/sh
+
+ResName=$1; shift;
+touch offline.xxx
+. "${CLUSTER_HOME}/bin/ag_i18n_inc.sh"
+VCSAG_SET_ENVS "${ResName}"
+
+VCSAG_GET_ATTR_VALUE "eAppHome" -1 1 "$@"
+if [ $? != $VCSAG_SUCCESS ]; then
+    exit 0
+fi
+eAppHome=${VCSAG_ATTR_VALUE}
+if [ ! -d $eAppHome ]
+then
+	echo "$eAppHome not exists" >> offline.xxx
+	exit 0
+fi
+echo "eAppHome is $eAppHome" >> offline.xxx
+date >> offline.xxx
+echo "begin stop eapp" >> offline.xxx
+MYPWD=`pwd`
+unset COLUMNS
+cd $eAppHome
+#./downOMC.sh true
+
+. ../svc_profile.sh
+
+echo "stop web ..." >> offline.xxx
+
+rec_count=`grep "/opt/UBP/bin/monitor_3rd_svcs.sh" /var/spool/cron/tabs/root|wc -l`
+if [ X$rec_count != X"0" ]
+then
+  sed -i "s/\* \* \* \* \* \/opt\/UBP\/bin\/monitor_3rd_svcs.sh//g" /var/spool/cron/tabs/root
+fi
+sed -i '/^$/d' /var/spool/cron/tabs/root
+/etc/init.d/cron reload
+/etc/init.d/cron restart
+
+v_result=`ps -ef|grep "/opt/ubp_websvc"|grep -wv grep|wc -l`
+if [ "X$v_result" != "X0" ]
+then
+  if [ -f /opt/ubp_websvc/webstop.sh ]
+  then
+    cd /opt/ubp_websvc
+    echo "web svc not exists, cd dir /opt/ubp_websvc" >> offline.xxx
+    ./webstop.sh
+  fi
+fi
+
+./ubp_adm -cmd stop
+service mysql stop
+cd $MYPWD
+date >> offline.xxx
+echo "end stop eapp" >> offline.xxx
+#exit 10
+
+exit 0
+
