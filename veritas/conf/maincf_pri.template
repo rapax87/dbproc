@@ -1,0 +1,151 @@
+include "types.cf"
+include "eAPPTypes.cf"
+
+cluster %CLUSTER_PRI% (
+	UserNames = { root = eHIfHDhBIcHQgQIe }
+	ClusterAddress = "%PRIClusterIP%"
+	Administrators = { root }
+	)
+
+remotecluster %CLUSTER_SEC% (
+	ClusterAddress = "%SECClusterIP%"
+	)
+
+heartbeat Icmp (
+	ClusterList = { %CLUSTER_SEC% }
+	Arguments @%CLUSTER_SEC% = { "%SECClusterIP%" }
+	)
+
+system %HOST_PRI% (
+	)
+
+group ClusterService (
+	SystemList = { %HOST_PRI% = 0 }
+	AutoStartList = { %HOST_PRI% }
+	)
+
+	Application ubpwac (
+		StartProgram = "/opt/VRTSvcs/bin/wacstart"
+		StopProgram = "/opt/VRTSvcs/bin/wacstop"
+		MonitorProcesses = { "/opt/VRTSvcs/bin/wac" }
+		)
+
+	IP gcoip (
+		Device @%HOST_PRI% = %PRIClusterNIC%
+		Address = "%PRIClusterIP%"
+		NetMask = "%PRIClusterMask%"
+		)
+
+	NIC csgnic (
+		Device @%HOST_PRI% = %PRIClusterNIC%
+		)
+
+	gcoip requires csgnic
+	ubpwac requires gcoip
+
+
+	// resource dependency tree
+	//
+	//	group ClusterService
+	//	{
+	//	Application ubpwac
+	//	    {
+	//	    IP gcoip
+	//	        {
+	//	        NIC csgnic
+	//	        }
+	//	    }
+	//	}
+
+
+group ubpApp (
+	SystemList = { %HOST_PRI% = 0 }
+	ClusterList = { %CLUSTER_SEC% = %SECClusterID%, %CLUSTER_PRI% = %PRIClusterID% }
+	Authority = 1
+	AutoStartList = { %HOST_PRI% }
+	ClusterFailOverPolicy = Auto
+	OnlineRetryInterval = 120
+	)
+
+	IP webip (
+		Device @%HOST_PRI% = %PRI_NIC%
+		Address = "%SERVERIP%"
+		NetMask = "%SERVERMASK%"
+		)
+
+	Mount mysql (
+		MountPoint = "/opt/mysql/data"
+		BlockDevice = "/dev/vx/dsk/%DISK_GROUP%/%VOL_MYSQL_NAME%"
+		FSType = vxfs
+		FsckOpt = " -y"
+		)
+
+	Mount srv (
+		MountPoint = "/srv"
+		BlockDevice = "/dev/vx/dsk/%DISK_GROUP%/%VOL_SRV_NAME%"
+		FSType = vxfs
+		FsckOpt = " -y"
+		)
+
+	NIC ubpnic (
+		Device @%HOST_PRI% = %PRI_NIC%
+		)
+		
+	RVGPrimary %RVG_NAME%_pri (
+		RvgResourceName = %RVG_NAME%
+		AutoResync = 1
+		)
+
+	eAPPApplication eapp (
+		eAppHome = "/opt/UBP/bin"
+		)
+	requires group ubpRVG online local hard
+	eapp requires mysql
+	eapp requires srv
+	eapp requires webip
+	mysql requires %RVG_NAME%_pri
+	srv requires %RVG_NAME%_pri
+	webip requires ubpnic
+
+
+	// resource dependency tree
+	//
+	//	group ubpApp
+	//	{
+	//	eAPPApplication eapp
+	//	    {
+	//	    IP webip
+	//	    Mount mysql
+	//	        {
+	//	        RVGPrimary %RVG_NAME%_pri
+	//	        }
+	//	    Mount srv
+	//	        {
+	//	        RVGPrimary %RVG_NAME%_pri
+	//	        }
+	//	    }
+	//	}
+
+
+group ubpRVG (
+	SystemList = { %HOST_PRI% = 0 }
+	AutoStartList = { %HOST_PRI% }
+	)
+
+	RVG %RVG_NAME% (
+		RVG = %RVG_NAME%
+		DiskGroup = %DISK_GROUP%
+		)
+
+
+
+
+
+	// resource dependency tree
+	//
+	//	group ubpRVG
+	//	{
+	//	RVG %RVG_NAME%
+	//	}
+
+
