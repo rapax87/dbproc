@@ -5,7 +5,7 @@
 #author          :xubingbing
 #date            :20131223
 #version         :0.1    
-#usage           :./exportdb.sh <outputdir>
+#usage           :./exportdb.sh <outputdir> [singletable]
 #notes           :there should be a output.list file which specifies table names 
 #                 in output directory. 
 #==============================================================================
@@ -14,12 +14,13 @@ cd $dir
 
 #if [ $# -lt 2 ];then
 if [ $# -lt 1 ];then
-  echo "Usage: $0 <outputdir>"
+  echo "Usage: $0 <outputdir>i [singletable]"
   exit 1
 fi
 
 #tablename=$1
 outputdir=$1
+singletable=$2
 datestr=`date +'%Y%m%d%H%M%S'`
 
 . ./dbcommon.sh
@@ -34,23 +35,33 @@ dbname=$g_ubpdb
 userName=$g_odb_user
 dbpasswd=$g_odb_psw
 
-if [ ! -f ${outputdir}/output.list ];then
+syncid=`getSyncInfo SYNCHRONID`
+mtime=`getSyncInfo LASTUPDATE`
+version=`getVersionInfo VerID`
+
+if [ ! -z "$singletable" ];then
+  outputfile=${outputdir}/${singletable}.xml
+  echo $singletable > ${outputdir}/outputing.list
+elif [ -f ${outputdir}/output.list ];then
+  outputfile=${outputdir}/output_${dbname}_${datestr}.xml
+  cp -rf ${outputdir}/output.list ${outputdir}/outputing.list
+else
   output "ERROR" "${outputdir}/output.list not exist" $LINENO
   exit 3
 fi
-outputfile=${outputdir}/output_${dbname}_${datestr}.xml
 rm -rf $outputfile
 echo "<?xml version=\"1.0\"?>" >>$outputfile
 echo "<mysqldump xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">" >>$outputfile
+echo "<sync syncno=\"$syncid\" latestupdate=\"$mtime\" version=\"$version\" />" >>$outputfile
 echo "<database name=\"${dbname}\">" >>$outputfile
 
-cat ${outputdir}/output.list|while read tablename;do
+cat ${outputdir}/outputing.list|while read tablename;do
   if [ -z "$tablename" ];then
     break
   fi
-  mysqldump ${dbname} ${tablename} -X -u${userName} -p${dbpasswd} -t --skip-triggers > ${outputdir}/${tablename}.xml
-  sed '1,3d;N;$d;P;D' ${outputdir}/${tablename}.xml>>$outputfile
-  rm -rf ${outputdir}/${tablename}.xml
+  mysqldump ${dbname} ${tablename} -X -u${userName} -p${dbpasswd} -t --skip-triggers > ${outputdir}/${tablename}_tmp.xml
+  sed '1,3d;N;$d;P;D' ${outputdir}/${tablename}_tmp.xml>>$outputfile
+  rm -rf ${outputdir}/${tablename}_tmp.xml
 done
 echo "</database>" >>$outputfile
 echo "</mysqldump>" >>$outputfile
