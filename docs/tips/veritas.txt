@@ -1,0 +1,54 @@
+					
+	No	命令	说明	示例	注释
+	配置VXVM				
+	1		初始化vxdisk（disk_1为RAID5名称）。	# ./vxdisksetup -i disk_1	
+	2		创建diskgroup，名称为eappdg。	# vxdg init eappdg disk_1	
+	3		查看创建的组	# vxdg list	
+	4		创建卷volume, 大小根据实际情况定。	"# vxassist -b -g eappdg make vol_srv 80g disk_1
+#vxassist -b -g eappdg make vol_mysql 80g disk_1
+#vxassist -b -g eappdg make vol_srl 80g disk_1"	
+	5		查看创建的卷积	#ls -l /dev/vx/rdsk/eappdg/	
+	6		创建vx filesystem。	"#mkfs -t vxfs /dev/vx/rdsk/eappdg/vol_srv
+#mkfs -t vxfs /dev/vx/rdsk/eappdg/vol_mysql
+#mkdir -p /opt/mysql/data"	
+	7		挂载磁盘。	"#mount -t vxfs /dev/vx/dsk/eappdg/vol_mysql /opt/mysql/data
+#mount -t vxfs /dev/vx/dsk/eappdg/vol_srv /srv"	
+	设置VVR				
+	1		设置VVR日志。	"#vxassist -g eappdg addlog vol_srv nlog=1 logtype=dcm
+#vxassist -g eappdg addlog vol_mysql nlog=1 logtype=dcm"	
+	2		执行以下命令，获取主备机的磁盘ID。	vxdg list	
+	3		主备机上，将对方磁盘ID写入备机/etc/vx/vras/.rdg中。		
+	4		主备机上，执行以下命令，启动SFHA。（可使用response文件）	"#cd /opt/VRTS/install/
+#./installsfha602 –start"	
+	5		主机上执行以下命令，设置VVR全同步。	"#vradmin -g eappdg createpri eapprvg vol_mysql,vol_srv vol_srl
+#vradmin -g eappdg addsec eapprvg 192.168.8.1 192.168.8.2 prlink=to_secondary_eapp srlink=to_primary_eapp"	
+	6		主机上执行以下命令启动复制。	# vradmin -g eappdg -a startrep eapprvg	eOMC是在配置修改后执行
+	维护命令				
+	1		检查复制连接	vxprint -thg eappdg | grep "^rl" |  grep "CONNECT"	
+	2		查看链接属性	vxprint -g eappdg -Pl	
+	3		清除错误	hagrp -clear ubpApp  eappsvr-1	
+	4		修改属性值	"haconf -makerw
+hatype -modify eAPPApplication  ToleranceLimit  0
+haconf -dump -makero"	
+			encrypt passwords	vcsencrypt -agent	http://www.filibeto.org/unix/hp-ux/lib/cluster/veritas-sf-ha-docs/docsets/vcs/html/06admin_vcs_cli_vcs323_285734.html
+			重装SFHA	需删除/etc/vx/licenses/lic下企业版license才能重装标准版	
+			2013/09/27 10:42:28 VCS INFO V-16-1-50135 User root fired command: haconf -makerw from ::ffff:20.20.20.40		
+			2013/09/27 10:42:31 VCS INFO V-16-1-50135 User root fired command: hatype -modify eAPPApplication  ToleranceLimit  3  from ::ffff:20.20.20.40		
+			2013/09/27 10:42:34 VCS INFO V-16-1-50135 User root fired command: haconf -dump -makero from ::ffff:20.20.20.40		
+					
+					
+				2013/09/04 10:51:02 VCS ERROR V-16-20084-19 (eappsvr-0) RVGPrimary:eapprvg_pri:online:The migrate operation for RVG eapprvg failed with error code 256 and message	
+					
+					
+					
+			"monitor 监控多个资源的问题：
+online时需要全部online, offline时需要全部offline
+如果部分资源启动，当作online还是offline有语义问题"		
+					
+			因为clean不干净webip未释放，所以ubp_adm启动不了		
+					
+		问题			
+			vradmind server not running on this system.	"Action: Start the vradmind server by running: 
+/etc/init.d/vras-vradmind.sh start 
+Then, run the command again. "	
+			VxVM VVR vxrlink ERROR V-5-1-5321 vxnetd threads are not running on secondary host	 /etc/init.d/vxnm-vxnetd start	
