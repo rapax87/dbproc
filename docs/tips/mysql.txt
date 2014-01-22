@@ -1,0 +1,130 @@
+MYSQL			
+select * from PTTUser inner join FixedUser on PTTUser.ISDN=FixedUser.ISDN;			
+select * from PTTUser left join FixedUser on PTTUser.ISDN=FixedUser.ISDN;			
+select * from PTTUser right join FixedUser on PTTUser.ISDN=FixedUser.ISDN;			
+			
+create or replace view testpf as select PTTUser.ISDN isdn1, FixedUser.ISDN isdn2 from PTTUser left join FixedUser on PTTUser.ISDN=FixedUser.ISDN;			
+			
+CREATE OR REPLACE VIEW testpf AS SELECT PTTUser.ISDN isdn1, FixedUser.ISDN isdn2 from PTTUser inner join FixedUser on PTTUser.ISDN=FixedUser.ISDN;			
+			
+CREATE OR REPLACE VIEW testpf 			
+AS			
+SELECT PTTUser.ISDN isdn1, FixedUser.ISDN isdn2 			
+FROM PTTUser inner join FixedUser on PTTUser.ISDN=FixedUser.ISDN;			
+			
+			
+select * from PTTUser order by ISDN desc limit 0,20;			
+select count(*) from PTTUser order by ISDN desc limit 0,20;			
+			
+http://10.121.87.24:8080/web_svc/			
+			
+http://localhost:8080/web_svc/login.action			
+			
+表结构及数据			
+mysqldump odb_test --user=odb_user --password=123456 --opt --triggers | mysql odb_test2 --user=odb_user --password=123456			
+mysqldump odb_test --user=odb_user --password=123456 --opt --triggers | mysql odb_test3 --user=odb_user --password=123456			
+mysqldump odb_test --user=odb_user --password=123456 --opt --triggers | mysql odb_test4 --user=odb_user --password=123456			
+mysqldump odb_test --user=odb_user --password=123456 --opt --triggers | mysql odb_test5 --user=odb_user --password=123456			
+mysqldump odb_test --user=odb_user --password=123456 --opt --triggers | mysql odb_test6 --user=odb_user --password=123456			
+mysqldump odb_test --user=odb_user --password=123456 --opt --triggers | mysql odb_test7 --user=odb_user --password=123456			
+mysqldump odb_test --user=odb_user --password=123456 --opt --triggers | mysql odb_test8 --user=odb_user --password=123456			
+mysqldump odb_test --user=odb_user --password=123456 --opt --triggers | mysql odb_test9 --user=odb_user --password=123456			
+mysqldump odb_test --user=odb_user --password=123456 --opt --triggers | mysql odb_test10 --user=odb_user --password=123456			
+mysqldump ubpdb --user=odb_user --password=123456 --opt --triggers | mysql ubpdb_xbb --user=odb_user --password=123456			
+			
+仅复制结构			
+mysqldump src_db_name [table1 table2...] --user=user --password=password --opt -d --triggers | mysql dest_db_name --user=user --password=password			
+mysqldump ubpdb --user=odb_user --password=123456 --opt -d --triggers | mysql ubpdb_xbb --user=odb_user --password=123456			
+			
+仅复制数据			
+mysqldump src_db_name [table1 table2...] --user=user --password=password -t | mysql dest_db_name --user=user --password=password			
+			
+同时复制结构和数据			
+mysqldump src_db_name [table1 table2...] --user=user --password=password --opt --triggers | mysql dest_db_name --user=user --password=password			
+			
+导出数据库			
+mysqldump -u odb_user -p xbb_latest > xbb_latest.sql			
+			
+导入			
+load xml local infile '/home/xwx43908/ubpdb.xml' into table TBL_PTTUser;			
+mysqldump -X -uodb_user -p123456 ubpdb >ubpdb.xml			
+LOAD XML LOCAL INFILE '/pathtofile/file.xml' INTO TABLE my_tablename;			
+mysqldump -X -uodb_user -p123456 ubpdb TBL_PTTUser>TBL_PTTUser.xml			
+load xml local infile '/home/xwx43908/ubpdb.xml' into table TBL_PTTUser;			
+load xml local infile '/home/xwx43908/TBL_PTTUser.xml' into table TBL_PTTUser;			
+			
+mysqldump -uodb_user -p123456 ubpdb_xbb<ubpdb.xml			
+			
+mysqldump -X ubpdb --user=odb_user --password=123456 --opt --triggers >ubp.xml			
+			
+sed '1,2d;N;$d;P;D' TBL_PTTUser.xml			
+			
+			
+连带更新/删除			
+alter table TBL_GroupUser add foreign key(ISDN) references TBL_PTTUser(ISDN) on delete cascade on update cascade;			
+alter table TBL_GroupUser add foreign key(ISDN) references TBL_FixedUser(ISDN) on delete cascade on update cascade;			
+alter table TBL_GroupUser add foreign key(GroupNumber) references TBL_Groups(GroupNumber) on delete cascade on update cascade;			
+			
+不准更新/删除			
+alter table TBL_GroupUser add foreign key(ISDN) references TBL_PTTUser(ISDN) on delete restrict on update restrict;			
+alter table TBL_GroupUser add foreign key(ISDN) references TBL_FixedUser(ISDN) restrict;			
+alter table TBL_GroupUser add foreign key(GroupNumber) references TBL_Groups(GroupNumber) restrict;			
+			
+show create table TBL_GroupUser;			
+alter table TBL_GroupUser drop foreign key TBL_GroupUser_ibfk_1;			
+alter table TBL_GroupUser drop foreign key TBL_GroupUser_ibfk_2;			
+alter table TBL_GroupUser drop foreign key TBL_GroupUser_ibfk_3;			
+			
+			
+export to xml			
+mysql -X -uxbb -p123456 -e "use xbb_latest; select * from TBL_PTTUser;" > ./TBL_PTTUser.xml 			
+			
+import from xml			
+LOAD XML LOCAL INFILE './TBL_PTTUser.xml' INTO TABLE TBL_PTTUser;			
+			
+LOAD XML LOCAL INFILE '/pathtofile/file.xml' 			
+INTO TABLE my_tablename(personal_number, firstname, ...);			
+			
+			
+			
+insert into TBL_GroupPTTUser values ('12340000', '1', 15);			
+insert into TBL_Groups values ('1', 'test1', 15, 1, 60, 1, '123');			
+			
+			
+			
+show VARIABLES like '%log%';			
+general_log_file                        | /home/mysql/data/ubp-one.log 			
+log_error                               | /home/mysql/data/ubp-one.err			
+			
+			
+添加unique约束	$ubp_local_ip		
+alter table ta add unique(id);			
+			
+			
+			
+	itf/cm/cm_msg.proto		./
+	itf/ubp_globe.hpp		./
+	src/platform/cm/cm_agent.cpp		./
+	src/platform/cm/cm_agent.hpp		./
+	src/platform/cm/cm_agent.xml		./
+	src/platform/cm/cm_const_def.hpp		./
+cp 	src/platform/cm/cm_daomocoperator.cpp		./
+cp 	src/platform/cm/cm_msg_commands.cpp		./
+cp 	src/platform/cm/cm_msg_commands.hpp		./
+cp 	src/platform/cm/CMakeLists.txt		./
+cp 	test/platform/cm/main.cpp		./
+cp 			
+cp 			
+cp 			
+cp 			
+cp 			
+cp 			
+			
+			
+mysql日期和字符相互转换方法			
+			
+date_format(date,'%Y-%m-%d')    -------------->oracle中的to_char();			
+str_to_date(date,'%Y-%m-%d')     -------------->oracle中的to_date();			
+			
+			
+SELECT table_name, REFERENCED_TABLE_NAME FROM information_schema.KEY_COLUMN_USAGE WHERE TABLE_SCHEMA='ubpdb_xbb' and REFERENCED_TABLE_NAME IS NOT NULL;			
