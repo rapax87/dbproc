@@ -1,0 +1,35 @@
+notes											
+将邮件当成附件发送的方法：											
+Export为rtf文件，然后作为附件											
+											
+											
+											
+											
+											
+											
+ -------------------------------------------------------------------------											
+VS2010安装VA_X											
+D:\MyDocuments\Downloads\VA_X_Setup1819											
+执行VA_X_Setup1819.vsix											
+											
+替换掉下面目录中的VA_X.dll											
+C:\Documents and Settings\xwx165018\Local Settings\Application Data\Microsoft\VisualStudio\10.0\Extensions\Whole Tomato Software\Visual Assist X\10.6.1819.0											
+											
+卸载											
+控制面板卸载											
+在VS2010->Tools->扩展管理器中卸载											
+ -------------------------------------------------------------------------											
+											
+											
+gpedit.msc											
+											
+											
+20 PC环境											
+  10.121.88.53											
+  mwx159112lab.china.huawei.com											
+											
+											
+ubp-ci-master    10.121.83.97  原ip：10.121.88.193  功能：CI控制  root/root											
+ci-agent         10.121.83.96  原ip：10.121.88.197  功能：平台测试      root/eapproot											
+eappsvr-platform 10.121.83.98  原ip：10.121.88.199  功能：平台测试      root/eapproot											
+windows          10.121.82.78  原ip：10.121.88.46   功能：CI agent，编译windows											
