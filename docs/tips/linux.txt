@@ -317,7 +317,143 @@ grep -H "FK:" /opt/UBP/conf/cm_service/*.xml|sed -r 's/^.*\/([^/]*)\.xml.*FK:([^
 									
 find /home/svnbak -name "*.gz" -mtime +30 -exec rm -rf {} \;									
 									
-svn status $EASY_CODE_VOB/code |grep -E '(hpp|cpp)'									
+svn status $EASY_CODE_VOB/code |grep -E '(hpp|cpp)'
+
+一、如何得知自己正在使用的linux是什么版本呢，下面的几种方法将给你带来答案！
+
+　　1. 查看内核版本命令：
+
+　　1) [root@q1test01 ~]# cat /proc/version
+
+　　 Linux version 2.6.9-22.ELsmp (bhcompile@crowe.devel.redhat.com) (gcc version 3.4.4 20050721 (Red Hat 3.4.4-2)) #1 SMP Mon Sep 19 18:00:54 EDT 2005
+
+　　2) [root@q1test01 ~]# uname -a
+
+　　Linux q1test01 2.6.9-22.ELsmp #1 SMP Mon Sep 19 18:00:54 EDT 2005 x86_64 x86_64 x86_64 GNU/Linux
+
+　　3) [root@q1test01 ~]# uname -r
+
+　　2.6.9-22.ELsmp
+
+　　2. 查看linux版本：
+
+　　1) 登录到服务器执行 lsb_release -a ,即可列出所有版本信息,例如:
+
+　　[root@3.5.5Biz-46 ~]# [root@q1test01 ~]# lsb_release -a
+
+　　LSB Version: :core-3.0-amd64:core-3.0-ia32:core-3.0-noarch:graphics-3.0-amd64:graphics-3.0-
+
+　　ia32:graphics-3.0-noarch
+
+　　Distributor ID: RedHatEnterpriseAS
+
+　　Description: Red Hat Enterprise Linux AS release 4 (Nahant Update 2)
+
+　　Release: 4
+
+　　Codename: NahantUpdate2
+
+　　注:这个命令适用于所有的linux，包括Redhat、SuSE、Debian等发行版。
+
+　　2) 登录到linux执行cat /etc/issue,例如如下:
+
+　　[root@q1test01 ~]# cat /etc/issue
+
+　　Red Hat Enterprise Linux AS release 4 (Nahant Update 2)
+
+　　Kernel \r on an \m
+
+　　3) 登录到linux执行cat /etc/redhat-release ,例如如下:
+
+　　[root@q1test01 ~]# cat /etc/redhat-release
+
+　　Red Hat Enterprise Linux AS release 4 (Nahant Update 2)
+
+　　注:这种方式下可以直接看到具体的版本号，比如 AS4 Update 1
+
+　　4)登录到linux执行rpm -q redhat-release ,例如如下:
+
+　　[root@q1test01 ~]# rpm -q redhat-release
+
+　　redhat-release-4AS-3
+
+　　注:这种方式下可看到一个所谓的release号，比如上边的例子是3
+
+　　这个release号和实际的版本之间存在一定的对应关系，如下：
+
+　　redhat-release-3AS-1 -> Redhat Enterprise Linux AS 3
+
+　　redhat-release-3AS-7.4 -> Redhat Enterprise Linux AS 3 Update 4
+
+　　redhat-release-4AS-2 -> Redhat Enterprise Linux AS 4
+
+　　redhat-release-4AS-2.4 -> Redhat Enterprise Linux AS 4 Update 1
+
+　　redhat-release-4AS-3 -> Redhat Enterprise Linux AS 4 Update 2
+
+　　redhat-release-4AS-4.1 -> Redhat Enterprise Linux AS 4 Update 3
+
+　　redhat-release-4AS-5.5 -> Redhat Enterprise Linux AS 4 Update 4
+
+　　另:第3)、4)两种方法只对Redhat Linux有效。
+
+
+
+二、如何查看LINUX是多少位 
+
+1. 查看linux机器是32位还是64位的方法：
+
+file /sbin/init 或者file /bin/ls
+/sbin/init: ELF64-bitLSB executable, x86-64, version 1 (SYSV), dynamically linked (uses shared libs), for GNU/Linux 2.6.18, stripped
+
+如果显示 64-bit 则为64位；
+
+file /sbin/init
+/sbin/init: ELF32-bitLSB executable, Intel 80386, version 1 (SYSV), for GNU/Linux 2.2.5, dynamically linked (uses shared libs), stripped
+
+如果显示为32 bit 则为32bit；
+
+uname -a:
+uname -a
+Linux pmx002**.**.**  2.6.32-71.el6.x86_64 #1 SMP Wed Sep 1 01:33:01 EDT 2010x86_64x86_64 x86_64 GNU/Linux
+
+x86_64表示64位机器
+
+uname -a
+Linux pmx0**.**.**    2.6.9-5.ELsmp #1 SMP Wed Jan 5 19:30:39 EST 2005i686i686 i386 GNU/Linux
+
+
+
+i686表示32位机器
+
+i686 只是i386的一个子集,支持的cpu从Pentium 2 (686)开始,之前的型号不支持.
+
+备注：
+
+1. i386 适用于intel和AMD所有32位的cpu.以及via采用X86架构的32的cpu.
+
+intel平台包括8086,80286,80386,80486,奔腾系列(1.2.3.4)、赛扬系列,Pentium D系列
+
+    以及centrino P-M,core duo 等.
+
+2. X86_64 适用于intel的Core 2 Duo, Centrino Core 2 Duo, and Xeon 和AMD Athlon64/x2, Sempron64/x2, Duron64等采用X86架构的64位cpu.
+
+3. PPC   适用于Apple Macintosh G3, G4, G5, PowerBook, and other non-Intel models
+
+安装DVD包括的软件要比安装光盘多一些,安装DVD也包括了两种图形界面(KDE和gnome).
+
+4.Jigdo
+
+也可以通过 Jigdo 下载 Fedora 发行版。Jigdo 可以加速下载安装盘的 ISO 镜像。同 BT 下载等待任务完全完成所不同，Jidgo 自动定位最快的镜像服务器(通过 Fedora 镜像管理器)，并且从中下载所需要的文件。为了减少所需的网络流量，可以让 Jigdo 扫描现存的 DVD 或 CD 介质。这个功能对于以下用户特别有用。 
+
+2. getconf LONG_BIT
+在32位和64位机器上运行如下命令，结果如下：
+[b@002 ~]$ getconf LONG_BIT
+64
+
+[root@pmx4 /]# getconf LONG_BIT
+32
+
 									
 set -o vi									
 									
