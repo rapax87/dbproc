@@ -1,0 +1,6 @@
+INCLUDE_DIRECTORIES(/home/xwx43908/usr/include/hello)
+LINK_DIRECTORIES(/home/xwx43908/usr/lib)
+ADD_EXECUTABLE(main main.c)
+#TARGET_LINK_LIBRARIES(main hello)
+#TARGET_LINK_LIBRARIES(main libhello.so)
+TARGET_LINK_LIBRARIES(main libhello.a)
