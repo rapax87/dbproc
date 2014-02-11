@@ -1,0 +1,25 @@
+Source Insight 集成SVN的方法  
+
+从提高工作效率的角度，在source insight 中集成svn最常用的操作还是有必要的。具体方法如下：
+
+1. SI添加自定义命令
+Options -> Custom commands
+Add new commands，命名为比如“SVN Diff”，并在run栏中输入SVN的外部调用命令
+"C:\Program Files\TortoiseSVN\bin\TortoiseProc.exe" /command:diff /path:%f /notempfile /closeonend
+其中diff即与最忌你一个版本比较的操作，借以查看本次代码修改的内容。其他常用的还有：
+"C:\Program Files\TortoiseSVN\bin\TortoiseProc.exe" /command:commit /path:%f /notempfile /closeonend
+"C:\Program Files\TortoiseSVN\bin\TortoiseProc.exe" /command:log /path:%f /notempfile /closeonend
+
+2. 快速调用自定义命令
+对自定义命令的调用有两种方式，快捷键或添加至菜单栏。快捷方式容易有冲突且太容易忘，不建议。
+Options -> Menu assignments 里找到刚新加的命令，选择一个自己喜欢的menu，insert一下就OK。
+打开菜单，确认添加了新功能～
+
+source insight代码格式化
+
+在SourceInsight菜单栏里，Options-->Custom Commands界面上选择：Add,在弹出对话框写入 命令名，在run中添加相应的命令。
+      1）ansi C 格式化当前文件的命令为："D:\lb\AStyle\bin\Astyle.exe" --style=ansi -s4 -S -N -L -m0 -M40 --convert-tabs --suffix=.pre %f
+      
+       2）ansi C 格式化某个目录下所有文件的命令为："D:\lb\AStyle\bin\Astyle.exe" Z:\LocalProject\DEZHOU3716/*.c Z:\LocalProject\DEZHOU3716/*.h --style=ansi -s4 -S -N -L -m0 -M40 --recursive --convert-tabs --suffix=.pre %f
+       
+       
