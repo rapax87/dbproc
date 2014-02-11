@@ -1,2 +1,17 @@
 /usr/local/lib
 /usr/local/include
+
+
+windows compile
+-----------------------------------------------
+in msys goto dir: cd D:\MyDocuments\Downloads\all\gettext-0.18.2\gettext-0.18.2
+./configure
+make
+make install
+
+linux compile
+-----------------------------------------------
+cd ~xwx43908/zip/gettext/gettext-0.18.2
+./configure
+make
+make install
