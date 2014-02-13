@@ -1,0 +1,33 @@
+在linux下安装svn
+
+*说明：在不同linux版本下编译安装svn需要的部件的版本很可能是不同的，这里安装的linux版本分别为：
+系统一：Linux version 3.0.13-0.27-default (geeko@buildhost) (gcc version 4.3.4 [gcc-4_3-branch revision 152973] (SUSE Linux) ) #1 SMP Wed Feb 15 13:33:49 UTC 2012 (d73692b)
+系统二：Linux version 3.0.74-0.6.8-default (geeko@buildhost) (gcc version 4.3.4 [gcc-4_3-branch revision 152973] (SUSE Linux) ) #1 SMP Wed May 15 07:26:33 UTC 2013 (5e244d7)
+
+1）下载安装包（svn、openssl、neon官网）
+subversion-1.6.1.tar.gz
+subversion-deps-1.6.1.tar.gz
+openssl-1.0.0a.tar.gz
+neon-0.30.0.tar.gz
+zlib-1.2.5.tar.gz
+
+2）解压tar zxvf XXX.tar.gz
+subversion-1.6.1与subversion-deps-1.6.1在同一目录
+neon解压后替换subversion-1.6.1中的neon，以解决 undefined reference to `SSL_SESSION_cmp’的问题
+
+3）编译
+zlib:./configure, make && make install
+openssl:
+./config  --prefix=/usr/local --openssldir=/usr/local/ssl
+make && make install
+./config shared --prefix=/usr/local --openssldir=/usr/local/ssl
+#make clean
+make && make install
+
+subversion:
+./configure  --with-ssl
+make && make install
+
+ldconfig使编译的所有库生效
+
+4）运行测试svn -version
