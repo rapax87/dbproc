@@ -1,0 +1,92 @@
+
+启动svn
+svnserve -d -r /home/svn
+
+svn status 查看svn 本地文件状态
+
+热备
+svnadmin hotcopy /home/svn/WN_eUBP_CODE_VOB /home/svnbak/WN_eUBP_CODE_VOB
+增量
+svnadmin dump project1 --revision 15 --incremental > dumpfile2
+
+SVN
+
+分支2013022801
+svn mkdir svn://10.121.87.8/WN_eUBP_CODE_VOB/branches/LABEL_ITER12_2013022801 -m "create dir 2013022801"
+svn mkdir svn://10.121.87.8/WN_eUBP_CODE_VOB/branches/LABEL_ITER12_2013022801/WN_eUBP_CODE_VOB -m "create dir 2013022801"
+svn copy svn://10.121.87.8/WN_eUBP_CODE_VOB/3rdparty svn://10.121.87.8/WN_eUBP_CODE_VOB/branches/LABEL_ITER12_2013022801/WN_eUBP_CODE_VOB/3rdparty -m "create new label 2013022801"
+svn copy svn://10.121.87.8/WN_eUBP_CODE_VOB/build svn://10.121.87.8/WN_eUBP_CODE_VOB/branches/LABEL_ITER12_2013022801/WN_eUBP_CODE_VOB/build -m "create new label 2013022801"
+svn copy svn://10.121.87.8/WN_eUBP_CODE_VOB/code svn://10.121.87.8/WN_eUBP_CODE_VOB/branches/LABEL_ITER12_2013022801/WN_eUBP_CODE_VOB/code -m "create new label 2013022801"
+
+查看锁
+svnadmin lslocks /home/svn/WN_eUBP_DOC_VOB
+
+分支LABEL_eAPPV100R002C00B034
+svn mkdir svn://10.121.87.8/WN_eUBP_CODE_VOB/branches/LABEL_eAPPV100R002C00B034 -m "create dir LABEL_eAPPV100R002C00B034"
+svn mkdir svn://10.121.87.8/WN_eUBP_CODE_VOB/branches/LABEL_eAPPV100R002C00B034/WN_eUBP_CODE_VOB -m "create dir LABEL_eAPPV100R002C00B034/WN_eUBP_CODE_VOB"
+svn copy svn://10.121.87.8/WN_eUBP_CODE_VOB/3rdparty svn://10.121.87.8/WN_eUBP_CODE_VOB/branches/LABEL_eAPPV100R002C00B034/WN_eUBP_CODE_VOB/3rdparty -m "create new label WN_eUBP_CODE_VOB"
+svn copy svn://10.121.87.8/WN_eUBP_CODE_VOB/build svn://10.121.87.8/WN_eUBP_CODE_VOB/branches/LABEL_eAPPV100R002C00B034/WN_eUBP_CODE_VOB/build -m "create new label LABEL_eAPPV100R002C00B034"
+svn copy svn://10.121.87.8/WN_eUBP_CODE_VOB/code svn://10.121.87.8/WN_eUBP_CODE_VOB/branches/LABEL_eAPPV100R002C00B034/WN_eUBP_CODE_VOB/code -m "create new label LABEL_eAPPV100R002C00B034"
+svn copy svn://10.121.87.8/WN_eUBP_CODE_VOB/gis svn://10.121.87.8/WN_eUBP_CODE_VOB/branches/LABEL_eAPPV100R002C00B034/WN_eUBP_CODE_VOB/gis -m "create new label LABEL_eAPPV100R002C00B034"
+svn copy svn://10.121.87.8/WN_eUBP_CODE_VOB/if_doc svn://10.121.87.8/WN_eUBP_CODE_VOB/branches/LABEL_eAPPV100R002C00B034/WN_eUBP_CODE_VOB/if_doc -m "create new label LABEL_eAPPV100R002C00B034"
+
+
+
+Repo-browser->check repo->可以看到lock break them
+Check for modification
+
+status -u -v
+svn status|awk '{print $2}'
+svn status|awk '{if ($1=="M" || $1 == "?") print $2}'
+
+svn status|awk '{if ($1=="M" || $1 == "?") print $2}' >list
+xargs rm < list
+
+
+SVN上传文件如果忘了增加可执行权限，则可以使用下面的命令：
+svn ps svn:executable '*' PATH
+svn ci -m "xxxx"
+
+Repo browser
+svn list -R
+
+
+svn cleanup 不生效时从根目录开始cleanup
+
+
+不要担心忘记作标签—你可以在以后任何时候给一个旧版本作标签：
+
+$ svn copy -r 11 file:///tmp/repos/test/trunk file:///tmp/repos/test/tags/0.6.32-prerelease -m "Forgot to tag at rev 11"
+
+Committed revision 13.
+
+svn move -m "move no-gco" svn://10.121.87.8/tools/veritas/slave svn://10.121.87.8/tools/veritas/no-gco/
+
+
+pre-commit hook
+进入仓库project1/hooks目录，找到pre-commit.tmpl文件，重命名，去掉后缀.tmpl。 
+编辑pre-commit文件： 
+http://num7.iteye.com/blog/210737
+
+
+#*　　*　　*　　*　　*　　command
+#分　时　日　月　周　命令
+30 0 * * * /home/svnbak/daily_backup.sh
+30 21 * * 5 /home/svnbak/weekly_backup.sh
+
+
+create trunk
+svn mkdir svn://10.121.87.8/WN_eUBP_CODE_VOB/trunk -m "create trunk"
+svn copy svn://10.121.87.8/WN_eUBP_CODE_VOB/3rdparty svn://10.121.87.8/WN_eUBP_CODE_VOB/trunk/3rdparty -m "create trunk"
+svn copy svn://10.121.87.8/WN_eUBP_CODE_VOB/build svn://10.121.87.8/WN_eUBP_CODE_VOB/trunk/build -m "create trunk"
+svn copy svn://10.121.87.8/WN_eUBP_CODE_VOB/code svn://10.121.87.8/WN_eUBP_CODE_VOB/trunk/code -m "create trunk"
+svn copy svn://10.121.87.8/WN_eUBP_CODE_VOB/if_doc svn://10.121.87.8/WN_eUBP_CODE_VOB/trunk/if_doc -m "create trunk"
+svn copy svn://10.121.87.8/WN_eUBP_CODE_VOB/gis svn://10.121.87.8/WN_eUBP_CODE_VOB/trunk/gis -m "create trunk"
+
+".svn
+trunk
+logs
+gis
+if_doc
+cs
+java"
