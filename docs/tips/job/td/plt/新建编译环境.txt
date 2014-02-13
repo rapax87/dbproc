@@ -1,0 +1,81 @@
+cd ~
+svn co svn://10.121.39.170/WN_eUBP_CODE_VOB/trunk WN_eUBP_CODE_VOB
+mysql> create database ubpdb_xbb;
+Query OK, 1 row affected (0.00 sec)
+
+mysqldump ubpdb --user=odb_user --password=123456 --opt --triggers | mysql ubpdb_xbb --user=odb_user --password=123456
+
+vi ~/.profile
+----------------------------------------------
+set -o vi
+. ~/WN_eUBP_CODE_VOB/build/eAsy_profile.sh
+export conf=${EASY_BUILD}/install/conf
+export lib=${EASY_BUILD}/install/lib
+export bin=${EASY_BUILD}/install/bin
+export log=${EASY_BUILD}/install/logs
+export src=${EASY_CODE_VOB}/code/src/platform/cm
+export test=${EASY_CODE_VOB}/code/test/platform/cm
+export srcb=${EASY_BUILD}/ide/gcc/src/platform/cm
+export testb=${EASY_BUILD}/ide/gcc/test/platform/cm
+export build=${EASY_BUILD}/ide/gcc
+#export build=$EASY_CODE_VOB/build/ide/gcc
+export itf=${EASY_CODE_VOB}/code/itf/cm
+export sh=${EASY_CODE_VOB}/code/install/scripts
+
+export moc=${EASY_CODE_VOB}/code/src/platform/moc/cm
+export mocb=${EASY_BUILD}/ide/gcc/src/platform/moc/cm
+export meta=${EASY_CODE_VOB}/code/src/platform/moc/mocmeta
+export metab=${EASY_BUILD}/ide/gcc/src/platform/moc/mocmeta
+
+export ftp=${EASY_CODE_VOB}/code/src/platform/modules/ftp
+export testftp=${EASY_CODE_VOB}/code/test/platform/ftp
+export ftpb=${EASY_BUILD}/ide/gcc/src/platform/modules/ftp
+export testftpb=${EASY_BUILD}/ide/gcc/test/platform/ftp
+#export testftpb=${EASY_BUILD}/ide/gcc/gtest/platform/ftp
+export itfftp=${EASY_CODE_VOB}/code/itf/platform/modules/ftp
+
+export gtest=${EASY_CODE_VOB}/code/gtest/platform/cm
+export gtestb=${EASY_BUILD}/ide/gcc/gtest/platform/cm
+
+export ubp_odb_user=odb_user
+export ubp_odb_psw=123456
+#export ubp_db_name=xbb_latest
+export ubp_db_name=udbdb_xbb
+export ubp_local_ip=10.121.39.168
+
+export col=${EASY_CODE_VOB}/code/install/scripts/collection
+export colb=${EASY_BUILD}/ide/gcc/install/scripts/collection
+----------------------------------------------
+. ~/.profile
+
+vi $EASY_CODE_VOB/build/eAsy_profile.sh
+----------------------------------------------
+#export EASY_BUILD=/home/$LOGNAME/eAsy_build
+export EASY_BUILD=$EASY_CODE_VOB/build
+----------------------------------------------
+
+vi $EASY_CODE_VOB/code/conf/ubp_db_cfgdata.xml
+----------------------------------------------
+<dbcfg name="user"
+           value="odb_user" />
+    <dbcfg name="passwd"
+           value="MTIzNDU2" />
+    <dbcfg name="database"
+           value="ubpdb_xbb" />
+----------------------------------------------
+
+vi $EASY_CODE_VOB/code/conf/deploy_policy.xml
+----------------------------------------------
+<HostCfg name="om_ip"
+             value="10.121.39.170" />
+    <HostCfg name="med_ip"
+             value="10.121.39.170" />
+<ServiceTypeInfo port_offset="1898">
+----------------------------------------------
+
+vi $EASY_CODE_VOB/code/conf/ubp_trace_config.xml
+----------------------------------------------
+log4j.rootLogger=INFO, UBP,ca
+###########  PLATFORM.CM  ##############
+log4j.logger.PLATFORM.CM=DEBUG,ca
+----------------------------------------------
