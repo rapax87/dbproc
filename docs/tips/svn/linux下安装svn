@@ -4,7 +4,11 @@
 系统一：Linux version 3.0.13-0.27-default (geeko@buildhost) (gcc version 4.3.4 [gcc-4_3-branch revision 152973] (SUSE Linux) ) #1 SMP Wed Feb 15 13:33:49 UTC 2012 (d73692b)
 系统二：Linux version 3.0.74-0.6.8-default (geeko@buildhost) (gcc version 4.3.4 [gcc-4_3-branch revision 152973] (SUSE Linux) ) #1 SMP Wed May 15 07:26:33 UTC 2013 (5e244d7)
 
-1）下载安装包（svn、openssl、neon官网）
+1）下载安装包（svn、openssl、neon官网
+http://www.webdav.org/neon/ 
+http://zlib.net/zlib-1.2.5.tar.gz 
+ftp://ftp.openssl.org/source/openssl-1.0.0c.tar.gz）
+
 subversion-1.6.1.tar.gz
 subversion-deps-1.6.1.tar.gz
 openssl-1.0.0a.tar.gz
