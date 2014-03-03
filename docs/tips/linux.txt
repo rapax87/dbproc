@@ -1,3 +1,5 @@
+xsltproc
+
 linux									
 显示相应文件名									
 find ~/ubp_view -name "*.sql" -exec grep -H UbpAlarm {} \;									
