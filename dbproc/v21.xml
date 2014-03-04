@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<cm:ugc_data xmlns:cm="http://www.td-tech.com/ubp/platform/cm/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.td-tech.com/ubp/platform/cm/xml ugc_cfg.xsd">
+  <PBXs>
+    <PBX>
+      <initialization>
+        <superUser>999999</superUser>
+        <superPwd>999999</superPwd>
+      </initialization>
+    </PBX>
+  </PBXs>
+</cm:ugc_data>
