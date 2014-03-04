@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<sync syncno="0" latestupdate="NULL" version="eAPP610V100R003C00B002" />
+<database name="ubpdb_xbb">
+	<table_data name="TBL_DCAttribute">
+	</table_data>
+</database>
+</mysqldump>
