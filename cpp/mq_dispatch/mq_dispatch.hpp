@@ -48,8 +48,8 @@ class MQ_IMPORT_EXPORT MsgDispatcher
     WorkerMap taskMap_;
     IMessageContext *pMqContext_;
     std::string endpoint_;
-    ACE_Recursive_Thread_Mutex rwPushSocketMutex_;  //rwPushSocketMutex_璇诲啓閿?
-    ACE_Recursive_Thread_Mutex rwTaskMapMutex_;  //rwPushSocketMutex_璇诲啓閿?
+    ACE_Recursive_Thread_Mutex rwPushSocketMutex_;  //rwPushSocketMutex_读写锁
+    ACE_Recursive_Thread_Mutex rwTaskMapMutex_;  //rwPushSocketMutex_读写锁
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -65,8 +65,8 @@ class MQ_IMPORT_EXPORT MsgDealWorker: private ubp::platform::thread::WorkerReque
      FullName:    MsgDealWorker::OnMessage
      Access:      public
      Returns:     void
-     Description: 鎺ユ敹MsgDispatcher娲惧彂鐨勬秷鎭?
-     Parameter:   void *pMsg 浣跨敤鍚庨渶瑕乺elease
+     Description: 接收MsgDispatcher派发的消息
+     Parameter:   void *pMsg 使用后需要release
     ********************************************************************/
     virtual ACE_INT32 OnMessage(void *pMsg) = 0;
 
@@ -74,9 +74,9 @@ class MQ_IMPORT_EXPORT MsgDealWorker: private ubp::platform::thread::WorkerReque
      Method:      SendMsg2Dispatcher
      FullName:    MsgDealWorker::SendMsg2Dispatcher
      Access:      public
-     Returns:     ACE_INT32锛氬彂閫佹秷鎭殑闀垮害锛屽鏋滆繑鍥濽BP_FAIL鍙戦€佸け璐?
-     Description: 鍚慚sgDispatcher鍙戦€佹秷鎭?
-     Parameter:   void *pMsg锛歁sgDispatcher鎺ユ敹鍒伴渶瑕乺elease
+     Returns:     ACE_INT32：发送消息的长度，如果返回UBP_FAIL发送失败
+     Description: 向MsgDispatcher发送消息
+     Parameter:   void *pMsg：MsgDispatcher接收到需要release
     ********************************************************************/
     ACE_INT32 SendMsg2Dispatcher(void *pMsg);
 
@@ -93,7 +93,7 @@ class MQ_IMPORT_EXPORT MsgDealWorker: private ubp::platform::thread::WorkerReque
     IMessageSocket *pDealSocket_;
     bool run_;
     std::string workerId_;
-    ACE_Recursive_Thread_Mutex rwSendSocketMutex_;  //rwSendSocketMutex_璇诲啓閿?
+    ACE_Recursive_Thread_Mutex rwSendSocketMutex_;  //rwSendSocketMutex_读写锁
 };
 
 }//mq
