@@ -96,7 +96,7 @@ void *MsgDispatcher::OnMessage()
   {
     while(currentFrameNum < 2)
     {
-      if(currentFrameNum == 0) //dealer socket甯︾殑鏍囪瘑锛屼笉闇€瑕佸鐞?
+      if(currentFrameNum == 0) //dealer socket带的标识，不需要处理
       {
         zmq_msg_init(&zmq_msg);
         ACE_INT32 size = zmq_recvmsg(pPushSocket_->GetMQSocket(), &zmq_msg, 0);
@@ -213,3 +213,4 @@ ACE_INT32 MsgDealWorker::SendMsg2Dispatcher(void *pMsg)
   ret = pDealSocket_->SendPtr<void>(pMsg);
   return ret;
 }
+
