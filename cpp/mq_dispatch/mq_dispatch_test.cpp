@@ -49,6 +49,42 @@ class TestMsg
     }
 };
 
+//////////////////////////////////////////////////////////////////////////
+
+class TestDispathRecvTask : public WorkerRequest
+{
+  public:
+    TestDispathRecvTask(MsgDispatcher *pDispatch)
+      : pDispatch_(pDispatch)
+    {
+    }
+
+    virtual ~TestDispathRecvTask(void)
+    {
+    }
+
+    virtual int call(void)
+    {
+      while(true)
+      {
+        void *pMsg = pDispatch_->OnMessage();                                               
+        if(NULL != pMsg)
+        {
+          TestMsg *pTestMsg = (TestMsg *)pMsg;
+          std::cout << "TestDispathRecvTask recv : " << pTestMsg->count << std::endl;
+          delete pTestMsg;
+        }
+        ACE_OS::sleep(ACE_Time_Value(0,1));
+      }
+      return UBP_SUCCESS;
+    }
+
+  private:
+    MsgDispatcher *pDispatch_;
+};
+
+
+//////////////////////////////////////////////////////////////////////////
 
 class MyWorkerTask : public MsgDealWorker
 {
@@ -64,12 +100,17 @@ class MyWorkerTask : public MsgDealWorker
 
     virtual ACE_INT32 OnMessage(void *pMsg)
     {
-        UBP_MQ_INFO("MsgDealWorker : " << this->GetWorkerID());
-      std::cout << "MsgDealWorker : " << this->GetWorkerID() << std::endl;
+      UBP_MQ_INFO("MsgDealWorker : " << this->GetWorkerID());
       TestMsg *msgPtr = (TestMsg *)pMsg;
-      std::cout << "recv : " << msgPtr->count << std::endl;
+      std::cout << "MyWorkerTask "<< this->GetWorkerID()<< " recv : " << 
+          msgPtr->count << std::endl;
       //std::auto_ptr<TestMsg> msgPtr((TestMsg*)pMsg);
-      //msgPtr->Print();
+      //msgPtr->Print();    
+
+      TestMsg *msgSend = new TestMsg;
+      msgSend->count = msgPtr->count;
+      this->SendMsg2Dispatcher(msgSend);
+
       delete msgPtr;
       return UBP_SUCCESS;
     }
@@ -104,6 +145,10 @@ int main(int argc, char *argv[])
   ret = dispatcher.Init();
   MQ_CHECK_VAL_RETURN_FAIL(ret, "Init MsgDispatcher error!");
 
+  TestDispathRecvTask *pDispatchRecvTask = new TestDispathRecvTask(&dispatcher);
+  ServiceEnvImpl_T::instance()->GetModule<ThreadPool>()->
+  PostRequest(pDispatchRecvTask);
+
   dispatcher.AddWorker("Work_1", new MyWorkerTask());
   dispatcher.AddWorker("Work_2", new MyWorkerTask());
 
@@ -124,7 +169,7 @@ int main(int argc, char *argv[])
 
   }
 
-  ACE_OS::sleep(5);
+  ACE_OS::sleep(10);
 
   ret = dispatcher.Fini();
   MQ_CHECK_VAL_RETURN_FAIL(ret, "Fini MsgQueue error!");
@@ -143,3 +188,4 @@ int main(int argc, char *argv[])
 
   return 0;
 }
+
