@@ -1,0 +1,21 @@
+已使用，待整理
+ACE
+CMake
+google protobuf
+svn
+mysql
+shell
+C++
+QT
+XMPP
+
+待学习
+swift
+
+待精进
+python
+php
+
+
+
+
