@@ -1,0 +1,6 @@
+mac
+http://jasdeep.ca/2012/05/installing-redis-on-mac-os-x/
+http://songzhan.iteye.com/blog/1893662
+
+linux
+http://www.oschina.net/question/12_18065
