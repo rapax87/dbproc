@@ -1,0 +1,57 @@
+1.1 Scope
+This policy applies to everyone who has access to company information and information systems or services. This includes all Employees as well as all third parties including company partners, suppliers, clients and other visitors who are given access to such systems. Any employees found to be misusing the company’s information systems in contravention of this policy, may be subject to disciplinary action.
+此方针适用于每个具有访问公司信息和信息系统或服务的人。这包括所有员工以及所有的第三方，包括公司的合作伙伴，供应商，客户和其他被给予访问此类系统权限的访问者。被发现违反此政策，滥用公司的信息系统的任何员工，都可能会受到纪律处分。
+1.2 Objectives 目的
+The objectives of information security policies, procedures and other documents are to:
+信息安全方针，规程和其他文档的目的是：
+			•Protect company group information assets 
+保护公司集团信息资产
+			•Protect our customers and employees information assets 
+保护我们客户和员工的信息资产
+			•Provide a corporate framework in which security threats to our information systems can be identified and managed 
+提供一个企业框架，使对我们的信息系统的安全威胁可以被识别和管理
+			•Demonstrate our compliance with legislative, regulatory and contractual requirements 
+表明我们遵守法律，法规和合同要求
+			•Provide accepted established procedures and processes that ensure uniform governance of information security across the organisation 
+提供被接受的既定的规程和流程，确保整个组织的信息安全得到统一管理
+			•Minimise the risk from unauthorised modification, destruction or disclosure of information, whether accidental or deliberate 
+尽量减少对信息的未经授权的修改，破坏或泄露的风险，无论是意外还是故意
+			•Ensure everyone in our organisation observes the appropriate standards of personal, ethical and professional conduct and receives appropriate training and awareness around information security 
+确保我们的组织中的每个人遵守个人适当的标准，道德和职业操守并接受适当的关于信息安全的培训和宣传。
+Classification: INTERNAL Page 5 of 13 Version 1.0
+Information Security Policy
+2. Access Controls (Logical) 
+2.1 Objective
+To prevent unauthorised access to the company’s network infrastructure, information and information systems through the use of appropriate security control measures.
+通过使用适当的安全控制措施，防止对公司的网络基础设施，信息和信息系统的未经授权的访问。
+2.2 General Policy
+.	2.2.1  Users must agree to the appropriate disclaimer presented as part of the authentication process. 
+.	用户必须同意作为认证过程的一部分的适当的免责声明。
+.	2.2.2  Users cannot approve their own user access requests. Authorisation must be obtained from the user’s line  manager and, where specified, the data owner before access is granted. 
+用户不能批准自己的用户的访问请求。在许可访问之前，必须从用户的直线经理和数据所有者获得授权。
+.	2.2.3  The level of access granted must be appropriate to the business purpose, and be based on the principle of least privilege and deny by default (If not technically possible, then advice must be sought from Group IT Security Management). 
+授予访问权限的级别必须符合相应的业务目的，并根据最小特权原则，在默认情况下拒绝（如果技术上不可行，必须从组IT安全管理处取得建议）。
+.	2.2.4  Users must be allocated a personal and unique user ID. 
+必须给用户分配一个个性化和独特的用户ID。
+.	2.2.5  Users requiring privileged access (for administrative activities such as, configuration of infrastructure, access to data unrelated to their role, etc.) must be allocated a second separate user ID. 
+必须给需要访问特权的用户（管理行为，例如，基础设施配置，对无关的自己的角色数据的访问，等等）分配一个单独的第二个用户ID。
+.	2.2.6  Privileged access must be allocated on a “need to use” basis, based on the environments worked in (e.g. development, test or production) required to complete his duty. 
+特权访问分配必须在“需要使用”的基础上，基于完成自己的职责要求的工作环境（如开发，测试或生产）。
+.	2.2.7  Privileged access may only be granted to contractors or other third party personnel for a maximum period of 1 year or their recorded contract end date whichever is the shorter. Extension of such privileged access must be requested via the formal authorisation procedure.
+授予承包商或其他第三方人员特权访问只能为1年或合同结束日期两者中较短的期限。延长这样的特权访问必须通过正式的授权规程要求。
+.	2.2.8  Privileged user rights for operating system access (Windows, UNIX, Linux etc.) must be reviewed at least annually. 
+对操作系统的访问（在Windows，UNIX，LINUX等）的特权用户权限，必须至少每年检视一次。
+.	2.2.9  Generic or shared accounts are not permitted unless their use is absolutely unavoidable (for example, by a team of third party support personnel). In such cases, generic accounts must be kept locked and only released for use upon documented and authorised request, and only for the period of justified use. 
+不允许使用通用或共享帐户，除非它们的使用是绝对无法避免的（例如，通过一个团队的第三方支持人员）。在这种情况下，通用帐户必须保持锁定，只在记录和授权要求下释放使用，并且在合理的使用期限内。
+.	2.2.10  Service accounts must only be used to run services for the single application or software service for which they are authorised; the sharing of service accounts across applications is strictly prohibited. Service accounts must not be used for interactive logon. 
+服务帐户必须仅用于运行授权的单个应用程序或软件服务;严格禁止服务帐户在应用程序之间共享。服务帐户绝不能用于交互式登录。
+.	2.2.11  User Accounts must be disabled or removed immediately on termination of employment for any user leaving the Company. 
+员工离职时其用户帐户必须立即停用或删除。
+.	2.2.12  Windows user accounts that are redundant / unused for 90 days or more must be removed or locked. 
+多余的或90天及以上时间未使用的Windows用户帐户必须被删除或锁定。
+.	2.2.13  User accounts must be reviewed and updated accordingly when changing jobs through the same process as for creating new users. 
+当变换工作时用户帐户必须通过与创建新用户一样的流程，进行审查和相应的更新。
+.	2.2.14  Temporary user accounts must be set up to expire on leaving date. 
+临时用户帐户必须设置到期失效日期。
+.	2.2.15  Redundant user IDs must not be reused. 
+冗余用户ID不得重复使用。
