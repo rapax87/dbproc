@@ -1,3 +1,120 @@
+Group IT Security Management
+Information Security Policy
+ 
+Publication Date: 1st December 2013
+ 
+This document is owned by Thierry Servais, (Group IT Security Manager) and maintained by Group IT Security Management and is produced as part of the Kingfisher Group Information Security policies, standards and procedures. The recommendations must ALWAYS be cross-referenced with the Kingfisher Group Information Security Policy which can be found on the corporate intranet. This document and the data contained within it are restricted, and are not to be reproduced or shared with anyone outside the Kingfisher Group. If you feel that any changes need to be made to this document or if you are unsure of its purposes or any content, please contact Group IT Security Management.
+ 
+Classification: INTERNAL Page 1 of 13 Version 1.0
+Information Security Policy
+Revision History
+Version	Change	Author	Date
+0.1	First draft	 
+James Agombar	 
+22/01/13
+0.2	Second draft	James Agombar
+ 	08/02/13
+ 
+0.3	Draft revisions - Added PCI references, revised encryption content	James Agombar	21/02/13
+0.4	Draft revisions	 
+James Agombar	 
+26/02/13
+0.5	Draft revisions	 
+James Agombar	 
+13/03/13
+0.6	Draft revisions – 5.2.6 following the meeting we have with Pete Finnigan (three month not achievable)	Olivier Lemoine	09/04/13
+0.7	Draft Revisions	 
+James Agombar	 
+22/07/13
+0.8	Draft Revisions	 
+James Agombar	 
+15/08/13
+0.9	Draft Revisions	 
+James Agombar	 
+21/08/13
+0.10	Draft Revisions following RUN feedback	 
+Matt Walker	 
+09/09/13
+0.11	Draft Revisions following RUN feedback	Matt Walker	10/09/13
+0.12	Draft Revisions to Patching Section	 
+Matt Walker
+ 	 
+12/09/12
+ 
+0.13	Draft Revisions following Think/Build/Run comments	Thierry Servais
+ 	15/10/13
+ 
+1.0	Final version following sign off from KITS operating Board and approval from Kingfisher IT Audit & Risk to communicate to the whole of the Kingfisher Group	 
+Matt Walker	 
+09/12/13
+Audit History
+Start Date of Audit	Version Audited	Auditor	   
+Document Owner	Audit Responsibility	 
+Next Audit Due
+			   		 
+			       		   
+					
+			   		 
+			       		   
+Classification: INTERNAL Page 2 of 13 Version 1.0
+Information Security Policy
+CONTENTS
+1.	INTRODUCTION ........................................................................................................................... 5 
+.	1.1  Scope .................................................................................................................................. 5 
+.	1.2  Objectives ............................................................................................................................ 5 
+2.	ACCESS CONTROLS (LOGICAL) ............................................................................................... 6 
+.	2.1  Objective.............................................................................................................................. 6 
+.	2.2  General Policy ..................................................................................................................... 6 
+.	2.3  Remote Access ................................................................................................................... 6 
+.	2.4  Password Policy for Non-Privileged Accounts .................................................................... 7 
+.	2.5  Password Policy for Privileged Accounts (Additional to 2.4)............................................... 7 
+.	2.6  Password Policy for Smartphones & Mobile Devices ......................................................... 7 
+3.	ACCESS CONTROLS (PHYSICAL) ............................................................................................. 8 
+.	3.1  Objective.............................................................................................................................. 8 
+.	3.2  General Policy ..................................................................................................................... 8 
+4.	NETWORK SECURITY ................................................................................................................. 8 
+.	4.1  Objective.............................................................................................................................. 8 
+.	4.2  General Policy ..................................................................................................................... 8 
+.	4.3  Demilitarised Zone (DMZ) ................................................................................................... 8 
+.	4.4  Firewalls .............................................................................................................................. 9 
+.	4.5  T est and Development Networks ........................................................................................ 9 
+.	4.6  Third Party Network Connectivity ........................................................................................ 9 
+.	4.7  Virtual Private Network (VPN) ............................................................................................. 9 
+.	4.8  Intrusion Detection / Prevention Systems ........................................................................... 9 
+.	4.9  Wireless Communications ................................................................................................... 9 
+5.	PATCH MANAGEMENT ............................................................................................................. 10 
+.	5.1  Objective............................................................................................................................ 10 
+.	5.2  Policy ................................................................................................................................. 10 
+6.	HARDENING (SERVER / WORKSTATION / DATABASE) ....................................................... 10 
+.	6.1  Objective............................................................................................................................ 10 
+.	6.2  General Policy ................................................................................................................... 10 
+7.	PROTECTION AGAINST MALICIOUS SOFTWARE ................................................................. 10 
+.	7.1  Objective............................................................................................................................ 10 
+.	7.2  Policy ................................................................................................................................. 11 
+8.	ENCRYPTION ............................................................................................................................. 11 
+.	8.1  Objective............................................................................................................................ 11 
+.	8.2  General Policy ................................................................................................................... 11 
+9.	AUDIT & LOGGING .................................................................................................................... 11 
+.	9.1  Objective............................................................................................................................ 11 
+.	9.2  General Policy ................................................................................................................... 12 
+10.	SECURITY INCIDENT MANAGEMENT ..................................................................................... 12 
+.	10.1  Objective............................................................................................................................ 12 
+.	10.2  General Policy ................................................................................................................... 12 
+11.	VULNERABILITY ASSESSMENTS............................................................................................ 12 
+.	11.1  Objective............................................................................................................................ 12 
+.	11.2  General Policy ................................................................................................................... 12 
+12.	SECURITY WAIVERS ................................................................................................................. 13 
+Classification: INTERNAL Page 3 of 13 Version 1.0
+Information Security Policy
+.	12.1  Objective............................................................................................................................ 13 
+.	12.2  General Policy ................................................................................................................... 13 
+13. FURTHER INFORMATION ......................................................................................................... 13
+Classification: INTERNAL Page 4 of 13 Version 1.0
+Information Security Policy
+1. Introduction
+Information and information systems are incredibly important assets to the company and it is essential Kingfisher takes all the necessary steps to ensure that they are comprehensively protected, available and accurate to support the operation and continued success of company at all times.
+信息和信息系统是公司非常重要的资产。翠鸟采取一切必要措施，以确保它们都得到全面保护，并可随时准确地支持运营和公司的持续成功，这是必不可少的。
+Kingfisher has a duty of care to its customers, employees, shareholders, banks, third parties etc. to manage information security and to follow a set of auditable policies and standards in support of this.
 1.1 Scope
 This policy applies to everyone who has access to company information and information systems or services. This includes all Employees as well as all third parties including company partners, suppliers, clients and other visitors who are given access to such systems. Any employees found to be misusing the company’s information systems in contravention of this policy, may be subject to disciplinary action.
 此方针适用于每个具有访问公司信息和信息系统或服务的人。这包括所有员工以及所有的第三方，包括公司的合作伙伴，供应商，客户和其他被给予访问此类系统权限的访问者。被发现违反此政策，滥用公司的信息系统的任何员工，都可能会受到纪律处分。
@@ -26,7 +143,7 @@ To prevent unauthorised access to the company’s network infrastructure, inform
 通过使用适当的安全控制措施，防止对公司的网络基础设施，信息和信息系统的未经授权的访问。
 2.2 General Policy
 .	2.2.1  Users must agree to the appropriate disclaimer presented as part of the authentication process. 
-.	用户必须同意作为认证过程的一部分的适当的免责声明。
+用户必须同意作为认证过程的一部分的适当的免责声明。
 .	2.2.2  Users cannot approve their own user access requests. Authorisation must be obtained from the user’s line  manager and, where specified, the data owner before access is granted. 
 用户不能批准自己的用户的访问请求。在许可访问之前，必须从用户的直线经理和数据所有者获得授权。
 .	2.2.3  The level of access granted must be appropriate to the business purpose, and be based on the principle of least privilege and deny by default (If not technically possible, then advice must be sought from Group IT Security Management). 
@@ -55,3 +172,274 @@ To prevent unauthorised access to the company’s network infrastructure, inform
 临时用户帐户必须设置到期失效日期。
 .	2.2.15  Redundant user IDs must not be reused. 
 冗余用户ID不得重复使用。
+2.3 Remote Access
+.	2.3.1  For all connections that grant access to the internal network, two-factor authentication must be implemented for remote access through public networks. 
+对于授权访问内部网络的所有连接，通过公共网络的远程访问必须进行双重身份认证。
+.	2.3.2  Software tokens may be installed on company-owned smartphones and on personal smartphones as long as they are protected by a PIN. 
+软件令牌可以安装在收PIN码保护的公司的智能手机和个人的智能手机上。
+.	2.3.3  Desktop and laptop devices must have an approved personal firewall and Anti-Malware solution installed 
+台式机和笔记本电脑的设备必须安装合法的个人防火墙和反恶意软件解决方案
+Classification: INTERNAL Page 6 of 13 Version 1.0
+Information Security Policy
+2.3.4 With the exception of Microsoft Direct Access, there must be an automatic disconnect of remote access sessions after a specific period of inactivity.
+除了微软直接访问，远程访问会话闲置一定时间后必须自动断开。
+2.4 Password Policy for Non-Privileged Accounts
+.	2.4.1  Group or shared passwords are explicitly prohibited. 
+组或共享密码被明确禁止。
+.	2.4.2  Passwords must be a minimum of 8 characters in length. 
+密码必须至少为8个字符。
+.	2.4.3  Passwords must be a mixture of upper case, lower case, and numerical characters. 
+密码必须是大写，小写和数字字符的混合体。
+.	2.4.4  Passwords must expire after a maximum of 90 days. 
+密码必须最多90天后过期。
+.	2.4.5  Users must be prevented from reusing the same password within 12 months. 
+用户必须防止12个月内重复使用相同的密码。
+.	2.4.6  Temporary passwords must be subject to enforced change at first logon. 
+以临时密码首次登录必须强制修改密码。
+.	2.4.7  Passwords for new accounts must be set to a different value for each user and then change enforced at first logon. 
+新帐户的密码，必须每个用户设置为不同的值，然后在第一次登录时修改。
+.	2.4.8  For all systems (Windows, non-Windows and applications) repeated access attempts must be limited by locking out the user id after 6 unsuccessful attempts within 30 minutes and must remain locked out until the administrator unlocks the account or remain locked for 30 minutes or a self service reset is in place which can be used. 
+对于所有的系统（Windows，非Windows和应用程序）反复尝试访问必须加以限制，锁定在30分钟内进行6次不成功的尝试的用户ID，直到管理员解锁该用户ID或并锁定了用户ID的限制必须保持锁定，直到管理员解除锁定该帐户或使用自助服务复位。
+.	2.4.9  For the uk.b-and-q.com Windows domain, repeated access attempts must be limited by locking out the user id after 15 unsuccessful attempts within 30 minutes, and the lockout duration must be set to 30 minutes; 
+对于uk.b-和-q.com Windows域，重复访问尝试必须限制在30分钟内15次不成功的尝试即锁定了用户ID，锁定时间必须设置为30分钟；
+.	2.4.10  Passwords must not be visible on the screen when typed. 
+键入密码时屏幕上不可见。
+.	2.4.11  The system must not indicate which part of the logon data is in error (for example user ID, password). 
+系统不可指示登录数据的哪个部分是错误的（例如用户ID，密码）。
+.	2.4.12  User identity must be verified before password resets are performed. 
+密码重置之前必须进行用户标识验证。
+.	2.4.13  During the logon process logon credentials must not be transmitted across the network in clear text. 
+在登录过程中的登录凭据不得在网络上以明文形式传输。
+.	2.4.14  Stored passwords must be protected using strong encryption. 
+存储的密码，必须使用强加密进行保护。
+2.5 Password Policy for Privileged Accounts (Additional to 2.4)
+.	2.5.1  Passwords for all privileged accounts must be a minimum of 16 characters in length. If not technically possible, then advice must be sought from the Group IT Security Management Team. 
+所有特权帐户的密码必须至少为16个字符。如果技术上不行的，那么必须从组IT安全管理小组获取建议。
+.	2.5.2  Passwords must be a mixture of upper case, lower case, numerical, and special characters. 
+密码必须是大写，小写字母，数字和特殊字符的混合体。
+.	2.5.3  Passwords must be changed at least every 90 days or be managed via Cyber-Ark. 
+密码必须至少每90天修改一次或通过数码方舟进行管理。
+.	2.5.4  Database passwords for application service accounts (non-interactive logon) that are not managed by Cyber-Ark must be changed every 12 months, comply with the Privileged Account password settings and be audited/reviewed on a regular basis to ensure compliance. 
+非由数码方舟管理的应用程序服务帐户使用的数据库密码（非交互式登录）必须每12个月修改，遵从特权帐户密码设置并且定期进行审核/审查以确保遵守。
+2.6 Password Policy for Smartphones & Mobile Devices
+.	2.6.1  Passwords must be a minimum of 4 characters in length. 
+密码必须至少长度为4个字符。
+.	2.6.2  Passwords must expire after a maximum of 90 days. 
+密码必须在最多90天之后过期。
+.	2.6.3  Passwords must not be reused within 6 months. 
+密码不能在6个月内重复使用。
+Classification: INTERNAL Page 7 of 13 Version 1.0
+Information Security Policy
+3. Access Controls (Physical) 3.1 Objective
+To prevent unauthorised physical access, damage and interference to the organisation's Data Centres / Test Labs using suitable control measures.
+使用合适的控制措施防止对组织的数据中心/测试实验室未经授权的物理访问，损坏和干扰。
+3.2 General Policy
+.	3.2.1  Access must be restricted to authorised personnel only. 
+访问必须仅限于授权的人员。
+.	3.2.2  Access must be via a secure entry control (e.g. swipe card, PIN entry, biometrics etc.) 
+访问必须通过安全输入控件（如刷卡，输入PIN码，生物识别等）
+.	3.2.3  Access must be recorded in an audit trail kept 3 months.
+访问必须被记录在审计跟踪并保存3个月。 
+.	3.2.4  Intruder detection/monitoring systems must be installed where appropriate. 
+在适当情况下必须安装入侵检测/监控系统。
+.	3.2.5  Unoccupied areas must be alarmed out of office hours. 
+无人区域在下班时间必须被报警装置或人员保护。
+.	3.2.6  Fire exits on Data Centre security perimeters must be alarmed and must self-close. 
+数据中心周边的安全通道有报警装置并必须自闭。
+.	3.2.7  Data Centres must deploy CCTV, guard patrols, intruder alarms etc. 
+数据中心必须部署闭路电视，保安巡逻，入侵者警报等。
+.	3.2.8  Access passes must be assigned to each individual and must be worn visibly. 
+访问通行证必须分配给每个人且必须在明显处佩戴。
+.	3.2.9  Visitors must be accompanied unless previously approved, and their date and time of entry and departure recorded as part of the audit trail of access. 
+除非事先获得批准参观者必须有人陪伴，他们进出的日期时间要被记录作为访问的审计跟踪的一部分。
+.	3.2.10  The log of visitors must be kept for at least three months. 
+访客的日志必须保存至少三个月。
+.	3.2.11  Company-managed IT equipment must be physically separated from third party managed equipment, as far as is practicable. 
+只要可行，公司管理的IT设备必须与第三方管理的设备物理上分开。
+4. Network Security 4.1 Objective
+To prevent unauthorised access to the organisation’s network infrastructure, information and information systems through the use of appropriate control measures.
+通过采用适当的控制措施防止对组织的网络基础设施，信息和信息系统的未经授权访问。
+4.2 General Policy
+.	4.2.1  The technical infrastructure deployed and tools used must provide adequate prevention and detection of unauthorised intrusion attempts. 
+技术基础设施部署和使用的工具必须提供适当的对未经授权的入侵企图预防和检测。
+.	4.2.2  Reporting mechanisms must provide adequate escalation and senior management awareness of actual and attempted security incidents. 
+报告机制必须提供足够的升级，并使高管意识到实际的和未遂安全事故。
+.	4.2.3  Network vulnerability reviews must be carried out regularly by Group IT Security Management and/or third parties authorised by Group IT Security Management. 
+网络脆弱性评审，必须由组IT安全管理和/或组IT安全管理授权的第三方定期举行。
+.	4.2.4  Networks must be fully documented showing all nodes, addressing, cabling and connections, and the documentation kept up to date and protected from unauthorised access. 
+网络必须完整记录显示的所有节点，寻址，布线和连接，并且文件保持最新，并防止未经授权的访问。
+.	4.2.5  All connections to 3rd party networks must be approved by Group IT Security Management. 
+所有到第三方网络的连接都必须由组IT安全管理的批准。
+4.3 Demilitarised Zone (DMZ)
+4.3.1 Internet-facing Kingfisher Group IT systems must not be directly connected to the internal IT infrastructure; they must be isolated in a DMZ network segment.
+Classification: INTERNAL Page 8 of 13 Version 1.0
+Information Security Policy
+.	4.3.2  All changes to the DMZ must be reviewed and approved by Group IT Security Management. 
+所有在DMZ的变动均必须由组IT安全管理审阅及批准。
+.	4.3.3  Any IT presentation service that is being provided to external users must reside in a DMZ. 
+提供给外部使用者的任何资讯简报服务必须驻留在DMZ中。
+.	4.3.4  Non-presentation services must not reside within a DMZ environment e.g. Customer Database. 
+非展示服务不能驻留在DMZ中的环境中，如：客户数据库。
+4.4 Firewalls
+.	4.4.1  A firewall must be placed at each Internet connection and between any DMZ and any internal network zone. 
+必须在每一个互联网连接放置防火墙，任一DMZ与任一内部网络区域之间。
+.	4.4.2  Firewalls must be dedicated devices and able to perform dynamic packet filtering i.e. Stateful Inspection. 
+防火墙必须是专用的设备和能够执行动态包过滤，即状态检测。
+.	4.4.3  A review of firewall and router rule-sets must be performed every 12 months (PCI environments every 6 months). Rules which are no longer required or have no business justification must be removed. 
+防火墙和路由器规则集的审查必须在每12个月进行（PCI环境中是每6个月）。不再需要或没有业务的理由的规则必须清除。
+.	4.4.4  All traffic must be denied by default and only services that are needed by the business must be enabled. 
+默认情况下所有流量都必须被拒绝，只启动业务需要的服务。
+4.5 Test and Development Networks
+.	4.5.1  Test and development environments must be segregated from production systems. 
+测试和开发环境，必须从生产系统隔离。
+.	4.5.2  Test data must be sanitised before use to ensure it does not contain “personal or sensitive data” such as names, addresses or financial information. 
+测试数据必须在使用前进行脱敏，以确保它不包含“个人信息或敏感数据”，如姓名，地址或财务信息。
+4.6 Third Party Network Connectivity
+.	4.6.1  Third party access must be governed by formal agreements. 
+第三方访问必须由正式的协议管辖。
+.	4.6.2  A nominated person must be appointed to have overall responsibility for each IT third party relationship (can be a KITS person for a KITS contract) to ensure that Kingfisher Group IT Security Policies and Standards are understood and accepted. 
+.	必须任命指定的人对每个IT第三方关系全面负责，以确保翠丰组IT安全政策和标准得到理解和接受。
+.	4.6.3  Third party users must be restricted to the minimum services and functions necessary for the business process. 
+第三方用户必须被限制到必需的业务过程使用的最小服务和功能。
+4.7 Virtual Private Network (VPN)
+4.7.1 All permanent connections to third parties, suppliers or trusted partners that carry information must use secure means such as VPN or MPLS.
+向第三方供应商或信任的合作伙伴携带信息的所有永久连接必须使用安全的手段，如VPN或MPLS。
+4.8 Intrusion Detection / Prevention Systems
+4.8.1 Where cardholder data is stored within the company environment, a network based Intrusion Detection System (IDS) or Intrusion Prevention System (IPS) must be deployed on all public-facing networks to monitor all network traffic.
+凡持卡人数据存储在公司环境下，基于入侵检测系统（IDS）或入侵防御系统（IPS），网络必须部署在所有面向公众的网络，以监控所有的网络流量。
+4.9 Wireless Communications
+.	4.9.1  Only authorised wireless access points can be connected to Kingfisher resources following the approval of Group Networks and Group IT Security Management. 
+在组网络和组IT安全管理的批准下，只有经过授权的无线接入点才可以连接到翠鸟资源。
+.	4.9.2  For corporate wireless networks the Service Set Identifier (SSID) must be changed from default name. 
+对于企业无线网络，服务集标识符（SSID）必须从默认名称更改为新名称。
+.	4.9.3  For publically accessible wireless networks an appropriate SSID can be used (e.g. Guest_WiFi). 
+供公开访问的无线网络，可以使用适当的SSID（例如Guest_WiFi）。
+.	4.9.4  All wireless networks connected to a production environment must use WPA encryption or above if supported. No new Access Points will be purchased post 2012 without WPA2 support. 
+连接到生产环境中的所有无线网络必须使用WPA或以上标准（如果支持的话）进行加密。2012年后所有新购买的接入点均支持WPA2。
+Classification: INTERNAL Page 9 of 13 Version 1.0
+Information Security Policy
+5. Patch Management 5.1 Objective
+To reduce risks resulting from exploitation of software vulnerabilities, all systems must have the most recently released critical software security patches to protect against exploitation by users, unauthorised individuals and malicious software.
+In the event of a real-time security incident/breach such as DDoS, hacking etc. all reasonable efforts must be made to secure the service by means of emergency patching or taking affected services offline whilst remediation/preventative actions are carried out.
+5.2 Policy
+.	5.2.1  Internet facing infrastructure such as firewalls and DMZ servers must be patched within one month of critical patch release. 
+面向因特网的基础设施，如防火墙和DMZ服务器必须在关键补丁发布一个月内打补丁。
+.	5.2.2  All internal Non-DMZ servers within 3 months of critical patch release. 
+所有内部非DMZ服务器必须在关键补丁发布三个月内打补丁。
+.	5.2.3  Clients must be patched within one month of critical patch release. 
+客户端必须在关键补丁发布一个月内打补丁。
+.	5.2.4  Databases must be patched within six months of critical patch release. 
+数据库必须在关键补丁发布六个月内打补丁。
+.	5.2.5  Non critical patches must be applied following a defined and agreed patch schedule. 
+非关键补丁必须在一个被定义和认可的日程下进行。
+Critical Patch Definition:
+Patches defined as Critical by the Vendor, or where exploits for the vulnerability have been seen being actively used and/or there is a real danger of compromise. Failure to apply a patch like this can result in a hacked system and a loss of data or personal information within the foreseeable future.
+6. Hardening (Server / Workstation / Database) 6.1 Objective
+To ensure compliance of systems with the company’s security policies and technical standards.
+6.2 General Policy
+.	6.2.1  Configuration and operating procedures must be maintained for consistent secure builds. 
+配置和操作程序必须保持一致的安全基础之上。
+.	6.2.2  All Windows 7 (and above) Desktop PC’s must have the local firewall active. 
+所有的Windows7（及以上）台式电脑的必须有活跃的本地防火墙。
+.	6.2.3  All workstations must be protected by a password protected screen lock after a timeout period of 15 minutes. 
+所有工作站必须在15分钟的超时周期后，由受密码保护的屏幕锁进行保护。
+.	6.2.4  Secure configurations must include but are not limited to authentication controls, administrative password standards, and standards for enabling only necessary services / protocols and patch management procedures. 
+安全配置必须包括但不限于认证控制，管理密码标准，以及仅启用必要的服务/协议和补丁管理程序的标准。
+.	6.2.5  Regular assessments of the security configuration must be performed by the IT Security Manager or authorised delegate. 
+IT安全经理或授权代表必须对安全配置进行定期评估。
+.	6.2.6  Web browsing directly from servers is prohibited except in cases where it is required for support purposes. 
+直接从服务器上浏览网络是禁止的，除非出于支持的目的被要求的地方。
+7. Protection against Malicious Software 7.1 Objective
+To protect the integrity of software and information.
+Classification: INTERNAL Page 10 of 13 Version 1.0
+Information Security Policy
+7.2 Policy
+.	7.2.1  All Windows servers and workstations, mail gateways, internet gateways must have Kingfisher approved anti- virus software installed and configured as part of the standard build. 
+所有的Windows服务器和工作站，邮件网关，互联网网关必须具备翠鸟批准安装和配置为标准构建的一部分的杀毒软件。
+.	7.2.2  Anti-virus software installed on corporate devices must be enabled and configured so that it cannot be tampered with. 
+安装在企业设备的防病毒软件必须启用和配置以使它不能被篡改。
+.	7.2.3  Anti-virus software must be configured to conduct periodic scans automatically. 
+防病毒软件必须被配置为自动进行定期扫描。
+.	7.2.4  On-access scanning must be enabled. 
+按访问扫描必须启用。
+.	7.2.5  Files found to be infected by malicious software that cannot be automatically cleaned, must be quarantined pending investigation for remediation. 
+文件被发现感染者，不能自动清除恶意软件的，必须被隔离作进一步调查整治。
+.	7.2.6  Where it is possible to connect, signature files and scan engines must be kept up to date (not greater than 48 hours old) on every system running anti-malware software. 
+凡有可能进行连接的地方，每个系统上运行的反恶意软件的签名文件和扫描引擎必须保持最新状态（不超过48小时）。
+.	7.2.7  A different anti-malware vendor must be used for the Proxy and SMTP servers to the one used on workstations and file servers. 
+代理和SMTP服务器和工作站及文件服务器必须使用不同的反恶意软件供应商。
+8. Encryption 8.1 Objective
+Encryption is used to protect information classified as secret or confidential in compliance with the Information Classification Policy.
+8.2 General Policy
+.	8.2.1  Proprietary encryption algorithms must not be used. 
+专有的加密算法不能使用。
+.	8.2.2  AES (256 bits and higher), SHA-2 (256 bits and higher), RSA (1024 bits and higher), ECC (160 bits and higher), ElGamal (1024 bits and higher) or FIPS140-2 accredited algorithms must be used as the basis for encryption solutions. 
+必须使用以AES（256位或更高），SHA-2（256位或更高），RSA（1024位及更高版本），ECC（160位或更高）的ElGamal（1024位及更高版本）或FIPS140-2认证算法为基础的加密方案。
+.	8.2.1  3DES (minimum double length keys) is acceptable on legacy systems built before 1st of January 2013. 
+3DES（最小双长度的密钥）对于2013年1月1日以前建造的旧系统是可以接受的。
+.	8.2.2  Private cryptographic keys must be stored securely. 
+私有加密密钥必须安全地存储。
+.	8.2.3  An approved Certificate Authority must be used (2048 bits). 
+必须使用经批准的认证机构（2048位）。
+.	8.2.4  Protection of private encryption keys used to secure large volumes of sensitive data must be split, so that it requires two or more people to reconstruct decryption process and decryption keys. 
+保护用于保护大量的敏感数据的私有密钥必须被分割，因此，它需要两个或更多的人来重建解密过程和解密密钥。
+.	8.2.5  The use of encryption must comply with national / international legislation. 
+使用加密必须符合国家/国际法规。
+9. Audit & Logging 9.1 Objective
+To monitor general activities on a system as well as to identify many types of suspicious attempts (successful or not) on the security of the system. Event log records help in distinguishing between security incidents, failures in hardware or software, and errors in system configuration that may allow or deny access to resources in an inappropriate manner. In addition, allowing forensic analysis to identify reasons for security breaches, carrying out investigations and identifying problems in order to take mitigating steps.
+Classification: INTERNAL Page 11 of 13 Version 1.0
+Information Security Policy
+9.2 General Policy
+.	9.2.1  Logs must be retained for at least a year, with a minimum of 90 days immediately available for review (online, archived, or restorable from back-up). 
+记录必须保留至少一年，至少90天可立即用于审查（在线，归档，或从备份恢复原状）。
+.	9.2.2  Event logs from external facing systems must be stored on a log server on the internal LAN. 
+面向外部系统的事件日志必须存储在内部局域网上的日志服务器上。
+.	9.2.3  Event log integrity must be maintained and protected from unauthorised modifications. 
+必须保持事件日志的完整性避免未经授权的修改保护。
+			•Event logs must contain sufficient detail to identify the user, system or application e.g. IP Address(s), MAC Address, UserID, ProcessID e.g. Internet browsing, email usage. 
+	事件日志中必须包含足够的细节来识别用户，系统或应用程序等等。IP地址（S），MAC地址，用户名，进程ID等等，互联网浏览，电子邮件的使用。
+			•Login, logout, grant, modify, or revoke access rights, including adding a new user or group, changing user privilege levels, changing file permissions, changing database object permissions, changing firewall rules, and user password changes. 
+	登录，注销，授权，修改或撤销访问权限，包括添加一个新用户或组，更改用户权限级别，更改文件权限，更改数据库对象的权限，更改防火墙规则和用户密码更改。
+			•System, network, or services configuration changes, including installation of software patches and updates, or other installed software changes. 
+	系统，网络或服务的配置更改，包括安装软件补丁和更新，或其他安装软件的变化。
+			•Access to all audit trails and initialisation of audit trails. 
+	对所有的审计跟踪的访问和审计跟踪的初始化。
+			•Application process start-up, shutdown or restart. 
+	应用程序的启动，关机或重启。
+			•Detection of suspicious / malicious activity such as from an Intrusion Detection or Prevention System (IDS/IPS), anti-virus system, or anti-spyware system. 
+	检测可疑/恶意活动，如从入侵检测和防御系统（IDS / IPS），防病毒系统，软件或反间谍系统。
+.	9.2.4  Event logs of external facing firewalls events must be reviewed on a daily basis for exceptions and incidents investigated if necessary. 
+面向外部的防火墙事件的事件日志，每天都必须审查异常和事故，如果需要进行调查。
+10. Security Incident Management 10.1 Objective
+To ensure information security events and weaknesses associated with information systems are communicated in a manner allowing timely corrective action to be taken.
+10.2 General Policy
+.	10.2.1  An impact assessment must be performed for all IT Security incidents. 
+必须对所有的IT安全事件进行影响评估。
+.	10.2.2  Where necessary, the response to an incident must be escalated, or external agencies contacted. 
+如有需要，对事故的响应必须被升级，或联络外部机构。
+.	10.2.3  Comprehensive records must be kept showing a full history of the incident. 
+必须保存全面的记录以显示事件的完整历史。
+11. Vulnerability Assessments 
+11.1 Objective
+To identify security vulnerabilities on network devices (e.g. firewalls, servers, workstations, etc.), and recommend suitable remediation where required.
+11.2 General Policy
+.	11.2.1  Periodic scans must be executed on devices connected to the network, with an enhanced focus on those devices that are directly accessible from the Internet. 
+连接到网络设备中必须执行定期扫描，要特别关注那些可直接从因特网访问的设备。
+.	11.2.2  Any identified vulnerabilities must be notified to the appropriate person for remediation or risk acceptance. 
+如发现任何漏洞，必须通知相关人员进行修复或风险接受。
+Classification: INTERNAL Page 12 of 13 Version 1.0
+Information Security Policy
+12. Security Waivers 安全豁免
+12.1 Objective
+To be used where it is not possible to comply with the Information Security Policies or Technical Standards. For example where a fix is not currently feasible due to; major impact on service, high cost to implement, more planning required to implement change etc.
+12.2 General Policy
+12.2.1 The completed form is to be submitted to IT Security for analysis and consideration as part of the waiver process owned by Group IT Security Management.
+作为组IT安全管理拥有的豁免程序的一部分，填好的表格将被提交给IT安全进行分析。
+
+13. Further Information
+For more information on security policies please refer to the relevant pages on the corporate intranet or contact the Group IT Security Management Team.
+Link to the policies and standards:
+Kingfisher Group Information Security Policies and Standards
+ 
+Classification: INTERNAL Page 13 of 13 Version 1.0
+
