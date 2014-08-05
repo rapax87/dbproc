@@ -1,2 +1,10 @@
 Macbook Pro升级SSD+8G内存+安装Lion
 http://www.dgtle.com/article-296-1.html
+
+OS X Mavericks
+说明：
+http://www.weste.net/2013/10-23/94008.html
+下载地址：
+https://itunes.apple.com/cn/app/os-x-mavericks/id675248567?mt=12
+U盘操作系统：
+http://ksmx.me/create-an-os-x-mavericks-usb-installer/
